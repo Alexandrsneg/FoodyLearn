@@ -1,4 +1,4 @@
-package com.example.foodylearn
+package com.example.foodylearn.util
 
 object Constants {
 
