@@ -1,4 +1,4 @@
-package com.example.foodylearn
+package com.example.foodylearn.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -6,14 +6,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foodylearn.data.Repository
 import com.example.foodylearn.models.FoodRecipe
 import com.example.foodylearn.util.NetworkResult
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -49,13 +47,13 @@ class MainViewModel @Inject constructor(
     private suspend fun getCall(queries: Map<String, String>){
         try {
             val response = repository.remote.getRecipes(queries)
-            recipesResponse.value = handleFoodRecipiesResponse(response)
+            recipesResponse.value = handleFoodRecipesResponse(response)
         } catch (e: Exception) {
             recipesResponse.value = NetworkResult.Error(e.message)
         }
     }
 
-    private fun handleFoodRecipiesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
+    private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")

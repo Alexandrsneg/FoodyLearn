@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foodylearn.MainViewModel
+import com.example.foodylearn.viewmodels.MainViewModel
 import com.example.foodylearn.R
 import com.example.foodylearn.adapters.RecipesAdapter
 import com.example.foodylearn.util.Constants
 import com.example.foodylearn.util.NetworkResult
+import com.example.foodylearn.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_recipes.view.*
 
@@ -20,17 +21,25 @@ import kotlinx.android.synthetic.main.fragment_recipes.view.*
 class RecipesFragment : Fragment() {
 
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
     private lateinit var mView: View
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_recipes, container, false)
 
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
         setUpRecyclerView()
         requestApiData()
 
@@ -38,7 +47,7 @@ class RecipesFragment : Fragment() {
     }
 
     private fun requestApiData() {
-        mainViewModel.getRecipes(applyQueries())
+        mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Success -> {
@@ -57,16 +66,6 @@ class RecipesFragment : Fragment() {
         }
     }
 
-    private fun applyQueries(): HashMap<String, String> {
-        val queries: HashMap<String, String> = HashMap()
-        queries["number"] = "50"
-        queries["apiKey"] = Constants.API_KEY
-        queries["type"] = "snack"
-        queries["diet"] = "vegan"
-        queries["addRecipeInformation"] = "true"
-        queries["fillIngredients"] = "true"
-        return queries
-    }
 
     private fun setUpRecyclerView() {
         mView.shimmer_recycler_view.adapter = mAdapter
