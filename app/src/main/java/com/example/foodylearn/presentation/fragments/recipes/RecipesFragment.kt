@@ -1,29 +1,37 @@
 package com.example.foodylearn.presentation.fragments.recipes
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodylearn.viewmodels.MainViewModel
 import com.example.foodylearn.R
 import com.example.foodylearn.adapters.RecipesAdapter
-import com.example.foodylearn.util.Constants
+import com.example.foodylearn.databinding.FragmentRecipesBinding
 import com.example.foodylearn.util.NetworkResult
+import com.example.foodylearn.util.observeOnce
 import com.example.foodylearn.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_recipes.view.*
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
 
+    private var _binding: FragmentRecipesBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
-    private lateinit var mView: View
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,13 +45,37 @@ class RecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_recipes, container, false)
+        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
 
 
         setUpRecyclerView()
-        requestApiData()
+        readDatabase()
 
-        return mView
+        binding.recipesFab.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+        }
+
+        return binding.root
+    }
+
+    private fun setUpRecyclerView() {
+       binding.shimmerRecyclerView.adapter = mAdapter
+       binding.shimmerRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun readDatabase() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    mAdapter.setData(it[0].foodRecipes)
+                    showShimmerEffect(false)
+                } else {
+                    requestApiData()
+                }
+            }
+        }
     }
 
     private fun requestApiData() {
@@ -56,6 +88,7 @@ class RecipesFragment : Fragment() {
                 }
                 is NetworkResult.Error -> {
                     showShimmerEffect(false)
+                    loadDataFromCache()
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -66,17 +99,27 @@ class RecipesFragment : Fragment() {
         }
     }
 
-
-    private fun setUpRecyclerView() {
-        mView.shimmer_recycler_view.adapter = mAdapter
-        mView.shimmer_recycler_view.layoutManager = LinearLayoutManager(requireContext())
+    private fun loadDataFromCache() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    mAdapter.setData(it[0].foodRecipes)
+                }
+            }
+        }
     }
+
 
     private fun showShimmerEffect(show: Boolean) {
         if (show)
-            mView.shimmer_recycler_view.showShimmer()
+            binding.shimmerRecyclerView.showShimmer()
         else
-            mView.shimmer_recycler_view.hideShimmer()
+            binding.shimmerRecyclerView.hideShimmer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
