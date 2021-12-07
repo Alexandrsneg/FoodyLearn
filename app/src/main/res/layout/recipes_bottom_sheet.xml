@@ -65,7 +65,7 @@
                     style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/side_dish"/>
+                    android:text="Dessert"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/appetizerChip"
@@ -86,7 +86,7 @@
                     style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="saladChip"/>
+                    android:text="Bread"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/breakfastChip"
@@ -235,7 +235,7 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnApply"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="24dp"

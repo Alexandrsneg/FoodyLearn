@@ -2,6 +2,7 @@ package com.example.foodylearn.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.foodylearn.util.Constants
@@ -22,6 +23,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
         val selectedDietType = stringPreferencesKey(Constants.PREFERENCES_DIET_TYPE)
         val selectedDietTypeId = intPreferencesKey(Constants.PREFERENCES_DIET_TYPE_ID)
+        val backOnline = booleanPreferencesKey(Constants.PREFERENCES_BACK_ONLINE)
     }
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.PREFERENCES_NAME)
@@ -32,6 +34,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             it[PreferenceKeys.selectedMealTypeId] = mealTypeId
             it[PreferenceKeys.selectedDietType] = dietType
             it[PreferenceKeys.selectedDietTypeId] = dietTypeId
+        }
+    }
+
+    suspend fun saveBackOnline(backOnline: Boolean){
+        context.dataStore.edit {
+            it[PreferenceKeys.backOnline] = backOnline
         }
     }
 
@@ -49,6 +57,17 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             val selectedDietType = it[PreferenceKeys.selectedDietType] ?: Constants.DEFAULT_DIET_TYPE
             val selectedDietTypeId = it[PreferenceKeys.selectedDietTypeId] ?: 0
             MealAndDietType(selectedMealType, selectedMealTypeId, selectedDietType, selectedDietTypeId)
+        }
+
+    val readBackOnline: Flow<Boolean> = context.dataStore.data
+        .catch {
+            if (it is IOException){
+                emit(emptyPreferences())
+            } else {
+                throw it
+            }
+        }.map {
+            it[PreferenceKeys.backOnline] ?: false
         }
 
 

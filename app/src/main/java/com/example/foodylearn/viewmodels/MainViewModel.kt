@@ -36,41 +36,37 @@ class MainViewModel @Inject constructor(
     /** RETROFIT */
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipes>> = MutableLiveData()
 
-    fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
-        getRecipesSafeCall(queries)
+    fun getRecipes(queries: Map<String, String>, isSearch: Boolean) = viewModelScope.launch {
+        getRecipesSafeCall(queries, isSearch)
     }
 
-    private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
+    private suspend fun getRecipesSafeCall(queries: Map<String, String>, isSearch: Boolean) {
         recipesResponse.value = NetworkResult.Loading()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (hasInternetConnection()) {
-                getCall(queries)
+                getCall(queries, isSearch)
             } else {
                 recipesResponse.value = NetworkResult.Error("No Internet Connection")
             }
         } else {
-            getCall(queries)
+            getCall(queries, isSearch)
         }
 
     }
 
-    private suspend fun getCall(queries: Map<String, String>){
+    private suspend fun getCall(queries: Map<String, String>, isSearch: Boolean){
         try {
-            val response = repository.remote.getRecipes(queries)
+            var response = repository.remote.getRecipes(queries)
+            if (isSearch)
+                response = repository.remote.searchRecipes(queries)
             recipesResponse.value = handleFoodRecipesResponse(response)
 
             recipesResponse.value?.data?.let {
                 insertRecipes(RecipesEntity(it))
-//                offlineCacheRecipes(it)
             }
         } catch (e: Exception) {
             recipesResponse.value = NetworkResult.Error(e.message)
         }
-    }
-
-    private fun offlineCacheRecipes(foodRecipes: FoodRecipes) {
-        val recipesEntity = RecipesEntity(foodRecipes)
-        insertRecipes(recipesEntity)
     }
 
     private fun handleFoodRecipesResponse(response: Response<FoodRecipes>): NetworkResult<FoodRecipes> {
