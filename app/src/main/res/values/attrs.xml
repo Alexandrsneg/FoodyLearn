@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CategoryView">
+        <attr name="cv_title" format="string"/>
+        <attr name="cv_is_active" format="boolean"/>
+        <attr name="cv_color" format="color"/>
+    </declare-styleable>
+</resources>

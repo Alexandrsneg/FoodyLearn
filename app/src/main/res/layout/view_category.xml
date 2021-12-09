@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/ivCheckCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvFavorites"
+        app:layout_constraintEnd_toEndOf="@+id/tvFavorites"
+        app:layout_constraintStart_toStartOf="@+id/tvFavorites"
+        app:srcCompat="@drawable/ic_check_circle"
+        app:tint="@color/darkGray" />
+
+    <TextView
+        android:id="@+id/tvCategoryTitle"
+        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/darkGray"
+        android:layout_gravity="center"
+        tools:text="Vegetarian"/>
+
+
+
+</LinearLayout>

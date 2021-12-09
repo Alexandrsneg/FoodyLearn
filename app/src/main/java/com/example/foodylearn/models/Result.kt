@@ -1,33 +1,38 @@
 package com.example.foodylearn.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Result(
     @SerializedName("aggregateLikes")
-    val aggregateLikes: Int,
+    val aggregateLikes: Int?,
     @SerializedName("cheap")
-    val cheap: Boolean,
+    val cheap: Boolean?,
     @SerializedName("dairyFree")
-    val dairyFree: Boolean,
+    val dairyFree: Boolean?,
+    @SerializedName("extendedIngredients")
+    val extendedIngredients: List<ExtendedIngredient>?,
     @SerializedName("glutenFree")
-    val glutenFree: Boolean,
+    val glutenFree: Boolean?,
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("readyInMinutes")
-    val readyInMinutes: Int,
+    val readyInMinutes: Int?,
     @SerializedName("servings")
-    val servings: Int,
+    val servings: Int?,
     @SerializedName("sourceName")
-    val sourceName: String,
+    val sourceName: String?,
     @SerializedName("sourceUrl")
-    val spoonacularSourceUrl: String,
+    val spoonacularSourceUrl: String?,
     @SerializedName("summary")
-    val summary: String,
+    val summary: String?,
     @SerializedName("title")
-    val title: String,
+    val title: String?,
     @SerializedName("vegan")
     val vegan: Boolean,
     @SerializedName("vegetarian")
@@ -35,5 +40,5 @@ data class Result(
     @SerializedName("veryHealthy")
     val veryHealthy: Boolean,
     @SerializedName("weightWatcherSmartPoints")
-    val weightWatcherSmartPoints: Int
-)
+    val weightWatcherSmartPoints: Int?
+): Parcelable{}
