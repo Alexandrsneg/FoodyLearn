@@ -23,7 +23,7 @@
             android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:layout_marginEnd="16dp"
-            loadImageFromUrl="@{ingredient.image}"
+            loadIngredientImageFromUrl = "@{ingredient.image}"
             tools:src="@drawable/ic_error_placeholder" />
 
         <LinearLayout

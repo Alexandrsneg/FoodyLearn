@@ -47,9 +47,11 @@ class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>(
         return ingredients.size
     }
 
-    fun setData(newData: List<ExtendedIngredient>){
-        ingredients = newData
-        notifyDataSetChanged()
+    fun setData(newData: List<ExtendedIngredient>?){
+        newData?.let {
+            ingredients = newData
+            notifyDataSetChanged()
+        }
 
 //        val recipesDiffUtil = RecipesDiffUtil(ingredients, newData.results)
 //        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
