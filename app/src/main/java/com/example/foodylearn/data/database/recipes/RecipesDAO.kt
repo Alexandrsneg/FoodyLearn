@@ -1,4 +1,4 @@
-package com.example.foodylearn.data.database
+package com.example.foodylearn.data.database.recipes
 
 import androidx.room.Dao
 import androidx.room.Insert

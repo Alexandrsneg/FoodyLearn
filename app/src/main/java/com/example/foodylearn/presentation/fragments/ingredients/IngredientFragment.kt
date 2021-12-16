@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodylearn.R
 import com.example.foodylearn.adapters.IngredientsAdapter
 import com.example.foodylearn.models.Result
+import com.example.foodylearn.util.Constants
 import kotlinx.android.synthetic.main.fragment_ingredient.view.*
 
 class IngredientFragment : Fragment() {
@@ -21,7 +22,7 @@ class IngredientFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_ingredient, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable("recipeBundle")
+        val myBundle: Result? = args?.getParcelable(Constants.RECIPE_RESULT_KEY)
 
         val adapter =  IngredientsAdapter()
         view.rvIngredients.adapter = adapter

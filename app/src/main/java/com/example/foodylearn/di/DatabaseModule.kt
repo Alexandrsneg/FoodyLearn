@@ -2,7 +2,7 @@ package com.example.foodylearn.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.foodylearn.data.database.RecipesDataBase
+import com.example.foodylearn.data.database.recipes.RecipesDataBase
 import com.example.foodylearn.util.Constants
 import dagger.Module
 import dagger.Provides

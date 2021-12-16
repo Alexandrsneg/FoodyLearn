@@ -20,6 +20,7 @@ object Constants {
 
     const val DATABASE_NAME = "recipes_database"
     const val RECIPES_TABLE = "recipes_table"
+    const val FAVORITES_TABLE = "favorites_table"
 
     //BottomSheet and prefs
     const val DEFAULT_MEAL_TYPE = "main course"
@@ -31,6 +32,8 @@ object Constants {
     const val PREFERENCES_DIET_TYPE_ID = "dietTypeId"
     const val PREFERENCES_NAME = "foody_preferences"
     const val PREFERENCES_BACK_ONLINE = "backOnline"
+
+    const val RECIPE_RESULT_KEY = "recipeBundle"
 
 
 }
