@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="favoritesEntity"
+            type="com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRecipesRowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/lightMediumGray"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/ivFavoriteRecipe"
+                    android:layout_width="200dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    loadImageFromUrl="@{favoritesEntity.recipes.image}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/tvFavoriteTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:ellipsize="end"
+                    android:text="@{favoritesEntity.recipes.title}"
+                    android:fontFamily="@font/courgette"
+                    android:maxLines="2"
+                    android:textColor="@color/darker"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toEndOf="@+id/ivFavoriteRecipe"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvFavoriteDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:maxLines="3"
+                    setHtmlFormattedText="@{favoritesEntity.recipes.summary}"
+                    android:textColor="@color/darkGray"
+                    app:layout_constraintEnd_toEndOf="@+id/tvFavoriteTitle"
+                    app:layout_constraintStart_toStartOf="@+id/tvFavoriteTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFavoriteTitle" />
+
+                <ImageView
+                    android:id="@+id/ivFavoriteFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvFavoriteDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFavoriteDescription"
+                    app:srcCompat="@drawable/ic_bookmark_filled"
+                    app:tint="@color/red" />
+
+                <TextView
+                    android:id="@+id/tvFavoriteFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:text="100"
+                    setNumberOfLikes="@{favoritesEntity.recipes.aggregateLikes}"
+                    android:textColor="@color/red"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ivFavoriteFavorite"
+                    app:layout_constraintStart_toStartOf="@+id/ivFavoriteFavorite"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFavoriteFavorite" />
+
+                <ImageView
+                    android:id="@+id/ivFavoriteClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvFavoriteFavorite"
+                    app:layout_constraintStart_toEndOf="@+id/ivFavoriteFavorite"
+                    app:srcCompat="@drawable/ic_alarm"
+                    app:tint="@color/yellow" />
+
+                <TextView
+                    android:id="@+id/tvFavoriteClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    setNumberOfMinutes="@{favoritesEntity.recipes.readyInMinutes}"
+                    android:textColor="@color/yellow"
+                    app:layout_constraintEnd_toEndOf="@+id/ivFavoriteClock"
+                    app:layout_constraintStart_toStartOf="@+id/ivFavoriteClock"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFavoriteClock" />
+
+                <ImageView
+                    android:id="@+id/ivFavoriteVegan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    applyVeganColor="@{favoritesEntity.recipes.vegan}"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivFavoriteClock"
+                    app:layout_constraintStart_toEndOf="@+id/ivFavoriteClock"
+                    app:srcCompat="@drawable/ic_vegan" />
+
+                <TextView
+                    android:id="@+id/tvVegan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vegan"
+                    applyVeganColor="@{favoritesEntity.recipes.vegan}"
+                    app:layout_constraintEnd_toEndOf="@+id/ivFavoriteVegan"
+                    app:layout_constraintStart_toStartOf="@+id/ivFavoriteVegan"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFavoriteVegan" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

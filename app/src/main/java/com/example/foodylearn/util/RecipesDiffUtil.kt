@@ -4,8 +4,8 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.foodylearn.models.Result
 
 class RecipesDiffUtil(
-    private val oldList: List<Result>,
-    private val newList: List<Result>
+    private val oldList: List<Any>,
+    private val newList: List<Any>
 ): DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

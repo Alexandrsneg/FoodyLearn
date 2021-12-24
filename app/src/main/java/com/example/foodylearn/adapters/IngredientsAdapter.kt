@@ -4,12 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodylearn.bindingadapters.IngredientRowBinding
 import com.example.foodylearn.databinding.IngredientsRowLayoutBinding
-import com.example.foodylearn.databinding.RecipiesRowLayoutBinding
 import com.example.foodylearn.models.ExtendedIngredient
-import com.example.foodylearn.models.FoodRecipes
-import com.example.foodylearn.models.Result
 import com.example.foodylearn.util.RecipesDiffUtil
 
 class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>() {
@@ -47,15 +43,15 @@ class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>(
         return ingredients.size
     }
 
-    fun setData(newData: List<ExtendedIngredient>?){
-        newData?.let {
-            ingredients = newData
-            notifyDataSetChanged()
-        }
+    fun setData(newData: List<ExtendedIngredient>){
+//        newData?.let {
+//            ingredients = newData
+//            notifyDataSetChanged()
+//        }
 
-//        val recipesDiffUtil = RecipesDiffUtil(ingredients, newData.results)
-//        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-//        ingredients = newData.results
-//        diffUtilResult.dispatchUpdatesTo(this)
+        val recipesDiffUtil = RecipesDiffUtil(ingredients, newData)
+        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
+        ingredients = newData
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 }

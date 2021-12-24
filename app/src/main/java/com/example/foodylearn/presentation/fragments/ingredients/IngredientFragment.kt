@@ -27,8 +27,10 @@ class IngredientFragment : Fragment() {
         val adapter =  IngredientsAdapter()
         view.rvIngredients.adapter = adapter
         view.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
-        myBundle?.let {
-            adapter.setData(it.extendedIngredients)
+        myBundle?.let { result ->
+            result.extendedIngredients?.let {
+                adapter.setData(it)
+            }
         }
 
         return view

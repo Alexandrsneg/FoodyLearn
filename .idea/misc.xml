@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/activity_details.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/favorites_row_layot.xml" value="0.25" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.15729166666666666" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_ingredient.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_recipes.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/ingredients_row_layout.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/recipies_row_layout.xml" value="0.15729166666666666" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/menu/details_menu.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/menu/recipes_menu.xml" value="0.17916666666666667" />
       </map>
     </option>
   </component>
