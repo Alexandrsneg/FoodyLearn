@@ -12,4 +12,5 @@
     <string name="main_course">Main course</string>
     <string name="side_dish">Side dish</string>
     <string name="diet_type">Diet Type</string>
+    <string name="delete_favorite_menu">Delete Favorite Menu</string>
 </resources>

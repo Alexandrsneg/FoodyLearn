@@ -10,13 +10,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clRecipesRowLayout"
+        android:id="@+id/clFavoritesRecipesRowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvFavoriteCardContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"

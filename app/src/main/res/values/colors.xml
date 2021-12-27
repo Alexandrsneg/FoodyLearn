@@ -23,5 +23,11 @@
     <color name="chipTextColor">@color/darkGray</color>
 
     //tabLayout
-    <color name="actionBarBackgroundColor">@color/colorPrimary</color>
+    <color name="actionBarBackgroundColor">@color/darker</color>
+
+    <color name="statusBarColor">@color/colorPrimaryDark</color>
+    <color name="contextualStatusBarColor">@color/dark</color>
+    <color name="contextualActionBarColor">@color/dark</color>
+
+    <color name="cardActiveBackgroundColor">#106200EA</color>
 </resources>

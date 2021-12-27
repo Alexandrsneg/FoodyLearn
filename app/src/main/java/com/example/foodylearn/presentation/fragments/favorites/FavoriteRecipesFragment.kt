@@ -28,7 +28,7 @@ class FavoriteRecipesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
-        val adapter = FavoriteRecipesAdapter()
+        val adapter = FavoriteRecipesAdapter(requireActivity())
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
         binding.mAdapter = adapter
@@ -37,9 +37,9 @@ class FavoriteRecipesFragment : Fragment() {
         binding.rvFavorites.layoutManager = LinearLayoutManager(requireContext())
 
 
-        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner, {
+        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner) {
             adapter.setData(it)
-        })
+        }
 
         return binding.root
     }
