@@ -1,9 +1,6 @@
 package com.example.foodylearn.adapters
 
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -14,13 +11,16 @@ import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 import com.example.foodylearn.databinding.FavoritesRowLayotBinding
 import com.example.foodylearn.presentation.fragments.favorites.FavoriteRecipesFragmentDirections
 import com.example.foodylearn.util.RecipesDiffUtil
+import com.example.foodylearn.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.favorites_row_layot.view.*
 
 class FavoriteRecipesAdapter(
-    private val requireActivity: FragmentActivity
+    private val requireActivity: FragmentActivity,
+    private val mainViewModel: MainViewModel
 ) : RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>(), android.view.ActionMode.Callback {
 
-    private var favoriteRecipes = emptyList<FavoritesEntity>()
+    private var favoriteRecipes = arrayListOf<FavoritesEntity>()
+    private var mActionMode: ActionMode? = null
 
     private var myViewHolders = arrayListOf<MyViewHolder>()
     private var multiSelection = false
@@ -39,7 +39,6 @@ class FavoriteRecipesAdapter(
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = FavoritesRowLayotBinding.inflate(layoutInflater, parent, false)
                 return MyViewHolder(binding)
-
             }
         }
 
@@ -89,17 +88,27 @@ class FavoriteRecipesAdapter(
 
     private fun applySelection(holder: MyViewHolder, currentRecipe: FavoritesEntity) {
         if (selectedRecipes.contains(currentRecipe)) {
-            changeRecipeStyle(holder, R.color.cardview_light_background, R.color.lightMediumGray)
             selectedRecipes.remove(currentRecipe)
+            changeRecipeStyle(holder, R.color.cardview_light_background, R.color.lightMediumGray)
         } else {
             selectedRecipes.add(currentRecipe)
             changeRecipeStyle(holder, R.color.cardActiveBackgroundColor, R.color.colorPrimary)
         }
+        applyActionModeTitle()
     }
 
     private fun changeRecipeStyle(holder: MyViewHolder, backgroundColor: Int, strokeColor: Int) {
 //        holder.itemView.clFavoritesRecipesRowLayout.setBackgroundColor(backgroundColor)
-        holder.itemView.cvFavoriteCardContainer.strokeColor = strokeColor
+        holder.itemView.cvFavoriteCardContainer.strokeColor =
+            ContextCompat.getColor(requireActivity, strokeColor)
+    }
+
+    private fun applyActionModeTitle() {
+        when (selectedRecipes.size) {
+            0 -> mActionMode?.finish()
+            1 -> mActionMode?.title = "${selectedRecipes.size} item selected"
+            else -> mActionMode?.title = "${selectedRecipes.size} items selected"
+        }
     }
 
     override fun getItemCount(): Int {
@@ -107,32 +116,36 @@ class FavoriteRecipesAdapter(
     }
 
     fun setData(newFavoriteRecipes: List<FavoritesEntity>) {
-//        favoriteRecipes = newFavoriteRecipes
-//        notifyDataSetChanged()
-
         val recipesDiffUtil = RecipesDiffUtil(favoriteRecipes, newFavoriteRecipes)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-        favoriteRecipes = newFavoriteRecipes
+        favoriteRecipes = newFavoriteRecipes as ArrayList<FavoritesEntity>
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
 
-    override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.favorites_contextual_menu, menu)
+        mActionMode = mode
         applyStatusBarColor(R.color.actionBarBackgroundColor)
         return true
     }
 
-    override fun onPrepareActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         return true
     }
 
-    override fun onActionItemClicked(mode: android.view.ActionMode?, menu: MenuItem?): Boolean {
+    override fun onActionItemClicked(mode: ActionMode?, menu: MenuItem?): Boolean {
+        selectedRecipes.forEach {
+            selectedRecipes.remove(it)
+            mainViewModel.deleteFavorite(it)
+        }
+        setData(selectedRecipes)
+        mActionMode?.finish()
         return true
     }
 
-    override fun onDestroyActionMode(mode: android.view.ActionMode?) {
-        myViewHolders.forEach{
+    override fun onDestroyActionMode(mode: ActionMode?) {
+        myViewHolders.forEach {
             changeRecipeStyle(it, R.color.cardview_light_background, R.color.lightMediumGray)
         }
         multiSelection = false
@@ -145,4 +158,9 @@ class FavoriteRecipesAdapter(
             ContextCompat.getColor(requireActivity, color)
     }
 
+    fun closeActionMenu(){
+        mActionMode?.let {
+            it.finish()
+        }
+    }
 }

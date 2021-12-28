@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_favorite_recipes.view.*
 class FavoriteRecipesFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by viewModels()
+    private val adapter by lazy { FavoriteRecipesAdapter(requireActivity(), mainViewModel) }
 
     private var _binding: FragmentFavoriteRecipesBinding? = null
     private val binding get() = _binding!!
@@ -25,10 +26,9 @@ class FavoriteRecipesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
-        val adapter = FavoriteRecipesAdapter(requireActivity())
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
         binding.mAdapter = adapter
@@ -46,6 +46,7 @@ class FavoriteRecipesFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        adapter.closeActionMenu()
         _binding = null
     }
 
