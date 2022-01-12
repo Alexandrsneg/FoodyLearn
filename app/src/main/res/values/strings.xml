@@ -13,4 +13,5 @@
     <string name="side_dish">Side dish</string>
     <string name="diet_type">Diet Type</string>
     <string name="delete_favorite_menu">Delete Favorite Menu</string>
+    <string name="remove_all">удалить всё</string>
 </resources>

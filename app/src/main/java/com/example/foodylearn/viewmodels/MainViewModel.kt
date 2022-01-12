@@ -10,7 +10,9 @@ import androidx.lifecycle.*
 import com.example.foodylearn.data.Repository
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 import com.example.foodylearn.data.database.recipes.RecipesEntity
+import com.example.foodylearn.models.FoodJoke
 import com.example.foodylearn.models.FoodRecipes
+import com.example.foodylearn.util.Constants
 import com.example.foodylearn.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -45,7 +47,7 @@ class MainViewModel @Inject constructor(
             repository.local.deleteFavorite(favoritesEntity)
         }
 
-    private fun deleteAllFavorites(favoritesEntity: FavoritesEntity) =
+    fun deleteAllFavorites() =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.deleteAllFavorites()
         }
@@ -54,6 +56,7 @@ class MainViewModel @Inject constructor(
 
     /** RETROFIT */
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipes>> = MutableLiveData()
+    var jokeResponse: MutableLiveData<NetworkResult<FoodJoke>> = MutableLiveData()
 
     fun getRecipes(queries: Map<String, String>, isSearch: Boolean) = viewModelScope.launch {
         getRecipesSafeCall(queries, isSearch)
@@ -87,6 +90,14 @@ class MainViewModel @Inject constructor(
             recipesResponse.value = NetworkResult.Error(e.message)
         }
     }
+
+    private suspend fun getJoke() {
+        var response = repository.remote.getJoke(Constants.API_KEY)
+        response.body()?.let {
+            jokeResponse.value = NetworkResult.Success(it)
+        }
+    }
+
 
     private fun handleFoodRecipesResponse(response: Response<FoodRecipes>): NetworkResult<FoodRecipes> {
         when {
