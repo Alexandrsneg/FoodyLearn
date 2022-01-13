@@ -34,4 +34,8 @@ object DatabaseModule {
     @Provides
     fun provideFavoritesDao(dataBase: RecipesDataBase) = dataBase.favoritesDao()
 
+    @Singleton
+    @Provides
+    fun provideJokeDao(dataBase: RecipesDataBase) = dataBase.jokeDao()
+
 }

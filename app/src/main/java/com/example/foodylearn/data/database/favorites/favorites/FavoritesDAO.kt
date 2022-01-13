@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface FavoritesDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavorites(recipesEntity: FavoritesEntity)
+    fun insertFavorites(recipesEntity: FavoritesEntity)
 
     @Query("SELECT * FROM favorites_table ORDER BY id ASC")
     fun readFavorites(): Flow<List<FavoritesEntity>>

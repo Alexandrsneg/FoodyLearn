@@ -21,6 +21,7 @@ object Constants {
     const val DATABASE_NAME = "recipes_database"
     const val RECIPES_TABLE = "recipes_table"
     const val FAVORITES_TABLE = "favorites_table"
+    const val JOKE_TABLE = "joke_table"
 
     //BottomSheet and prefs
     const val DEFAULT_MEAL_TYPE = "main course"

@@ -26,9 +26,10 @@
             android:layout_height="match_parent">
 
             <ScrollView
+                android:id="@+id/scrollView2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/tvDate"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,6 @@
                     android:id="@+id/tvJoke"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:fontFamily="@font/courgette"
                     android:padding="8dp"
                     android:textColor="@color/dark"
@@ -48,15 +48,16 @@
                     tools:text="Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke " />
             </ScrollView>
 
-            <TextView
-                android:id="@+id/tvDate"
+
+            <ProgressBar
+                android:id="@+id/pbCircleProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="07/10/1993" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@+id/scrollView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -62,6 +62,10 @@ class MainViewModel @Inject constructor(
         getRecipesSafeCall(queries, isSearch)
     }
 
+    fun getJoke() = viewModelScope.launch {
+        getJokeFromRest()
+    }
+
     private suspend fun getRecipesSafeCall(queries: Map<String, String>, isSearch: Boolean) {
         recipesResponse.value = NetworkResult.Loading()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -91,8 +95,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getJoke() {
-        var response = repository.remote.getJoke(Constants.API_KEY)
+    private suspend fun getJokeFromRest() {
+        jokeResponse.value = NetworkResult.Loading()
+        val response = repository.remote.getJoke(Constants.API_KEY)
         response.body()?.let {
             jokeResponse.value = NetworkResult.Success(it)
         }

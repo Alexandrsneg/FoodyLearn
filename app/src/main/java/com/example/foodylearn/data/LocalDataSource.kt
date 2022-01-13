@@ -2,6 +2,8 @@ package com.example.foodylearn.data
 
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesDAO
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
+import com.example.foodylearn.data.database.joke.JokeDAO
+import com.example.foodylearn.data.database.joke.JokeEntity
 import com.example.foodylearn.data.database.recipes.RecipesDAO
 import com.example.foodylearn.data.database.recipes.RecipesEntity
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +11,8 @@ import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
     private val recipesDAO: RecipesDAO,
-    private val favoritesDAO: FavoritesDAO
+    private val favoritesDAO: FavoritesDAO,
+    private val jokeDao: JokeDAO
 ) {
 
 
@@ -25,7 +28,7 @@ class LocalDataSource @Inject constructor(
         return  favoritesDAO.readFavorites()
     }
 
-    suspend fun insertFavorite(favoritesEntity: FavoritesEntity) {
+    fun insertFavorite(favoritesEntity: FavoritesEntity) {
         favoritesDAO.insertFavorites(favoritesEntity)
     }
 
@@ -36,4 +39,9 @@ class LocalDataSource @Inject constructor(
     suspend fun deleteAllFavorites(){
         favoritesDAO.deleteAllFavoriteRecipes()
     }
+
+    fun readJoke(): Flow<List<JokeEntity>> = jokeDao.readJoke()
+
+    suspend fun insertJoke(jokeEntity: JokeEntity) = jokeDao.insertJoke(jokeEntity)
+
 }
