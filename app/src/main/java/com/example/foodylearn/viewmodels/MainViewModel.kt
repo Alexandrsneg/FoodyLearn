@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
 import com.example.foodylearn.data.Repository
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
+import com.example.foodylearn.data.database.joke.JokeEntity
 import com.example.foodylearn.data.database.recipes.RecipesEntity
 import com.example.foodylearn.models.FoodJoke
 import com.example.foodylearn.models.FoodRecipes
@@ -31,6 +32,7 @@ class MainViewModel @Inject constructor(
     /** ROOM */
     val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
     val readFavoriteRecipes: LiveData<List<FavoritesEntity>> = repository.local.readFavoriteRecipes().asLiveData()
+    val readJoke: LiveData<JokeEntity?> = repository.local.readJoke().asLiveData()
 
     private fun insertRecipes(recipesEntity: RecipesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -50,6 +52,11 @@ class MainViewModel @Inject constructor(
     fun deleteAllFavorites() =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.deleteAllFavorites()
+        }
+
+    fun insertJoke(jokeEntity: JokeEntity) =
+        viewModelScope.launch(Dispatchers.IO){
+            repository.local.insertJoke(jokeEntity)
         }
 
 
@@ -96,11 +103,30 @@ class MainViewModel @Inject constructor(
     }
 
     private suspend fun getJokeFromRest() {
-        jokeResponse.value = NetworkResult.Loading()
-        val response = repository.remote.getJoke(Constants.API_KEY)
-        response.body()?.let {
-            jokeResponse.value = NetworkResult.Success(it)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (hasInternetConnection()) {
+                getJokeCall()
+            } else {
+                jokeResponse.value = NetworkResult.Error("No Internet Connection")
+            }
+        } else {
+            getJokeCall()
         }
+
+
+    }
+
+    private suspend fun getJokeCall() {
+        try {
+            jokeResponse.value = NetworkResult.Loading()
+            val response = repository.remote.getJoke(Constants.API_KEY)
+            response.body()?.let {
+                jokeResponse.value = NetworkResult.Success(it)
+            }
+        } catch (exception: Exception){
+            jokeResponse.value = NetworkResult.Error("No Internet Connection")
+        }
+
     }
 
 

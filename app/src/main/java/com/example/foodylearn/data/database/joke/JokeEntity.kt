@@ -10,5 +10,6 @@ import com.example.foodylearn.util.Constants
 class JokeEntity(
     @PrimaryKey(autoGenerate = false)
     var id: Int,
+    @Embedded
     var joke: FoodJoke
 )

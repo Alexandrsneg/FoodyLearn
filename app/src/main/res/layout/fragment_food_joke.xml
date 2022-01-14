@@ -42,6 +42,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/courgette"
                     android:padding="8dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
                     android:textColor="@color/dark"
                     android:textSize="20sp"
                     android:textStyle="bold"
