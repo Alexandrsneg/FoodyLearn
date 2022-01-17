@@ -22,7 +22,7 @@ class CategoryView @JvmOverloads constructor(
 
             var color = R.color.green
             if (!value)
-                color = R.color.darkGray
+                color = R.color.categoryColor
 
            view.ivCheckCircle.setColorFilter(resources.getColor(color))
            view.tvCategoryTitle.setTextColor(resources.getColor(color))

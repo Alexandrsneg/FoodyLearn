@@ -25,12 +25,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/lightMediumGray"
+            app:strokeColor="@color/strokeColor"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/cardBackgroundColor">
 
 
                 <ImageView
@@ -55,7 +56,7 @@
                     android:text="@{favoritesEntity.recipes.title}"
                     android:fontFamily="@font/courgette"
                     android:maxLines="2"
-                    android:textColor="@color/darker"
+                    android:textColor="@color/titleColor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toEndOf="@+id/ivFavoriteRecipe"
@@ -68,7 +69,7 @@
                     android:layout_marginTop="12dp"
                     android:maxLines="3"
                     setHtmlFormattedText="@{favoritesEntity.recipes.summary}"
-                    android:textColor="@color/darkGray"
+                    android:textColor="@color/descriptionColor"
                     app:layout_constraintEnd_toEndOf="@+id/tvFavoriteTitle"
                     app:layout_constraintStart_toStartOf="@+id/tvFavoriteTitle"
                     app:layout_constraintTop_toBottomOf="@+id/tvFavoriteTitle" />

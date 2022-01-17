@@ -15,14 +15,14 @@
         app:layout_constraintEnd_toEndOf="@+id/tvFavorites"
         app:layout_constraintStart_toStartOf="@+id/tvFavorites"
         app:srcCompat="@drawable/ic_check_circle"
-        app:tint="@color/darkGray" />
+        app:tint="@color/categoryColor" />
 
     <TextView
         android:id="@+id/tvCategoryTitle"
         android:layout_marginStart="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/darkGray"
+        android:textColor="@color/categoryColor"
         android:layout_gravity="center"
         tools:text="Vegetarian"/>
 

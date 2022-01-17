@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingStart="24dp"
     android:paddingEnd="24dp"
-    android:background="@drawable/food_joke_background_light"
+    android:background="@drawable/food_joke_background_dark"
     tools:context=".presentation.fragments.foodjoke.FoodJokeFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -18,12 +18,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/mediumGray"
+        app:strokeColor="@color/strokeColor"
         app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/cardBackgroundColor">
 
             <ScrollView
                 android:id="@+id/scrollView2"
@@ -44,7 +45,7 @@
                     android:padding="8dp"
                     android:visibility="gone"
                     tools:visibility="visible"
-                    android:textColor="@color/dark"
+                    android:textColor="@color/titleColor"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:text="Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke " />
