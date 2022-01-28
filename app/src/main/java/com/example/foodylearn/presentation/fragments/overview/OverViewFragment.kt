@@ -65,30 +65,30 @@ class OverViewFragment : Fragment() {
 //                        mlRoot.transitionToStart()
 //                    }
 //                }
-                mlRoot.addTransitionListener(object : MotionLayout.TransitionListener{
-                    override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
-                    override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
-                    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                        if (mlRoot.progress == 1F) {
-                            tvSummaryText.visibility = View.INVISIBLE
-                            scrollView3.visibility = View.VISIBLE
-                        }
-                        if (mlRoot.progress == 0F) {
-                            tvSummaryText.visibility = View.VISIBLE
-                            scrollView3.visibility = View.INVISIBLE
-                        }
-
-                    }
-
-                    override fun onTransitionTrigger(
-                        motionLayout: MotionLayout?,
-                        triggerId: Int,
-                        positive: Boolean,
-                        progress: Float
-                    ) {
-                    }
-
-                })
+//                mlRoot.addTransitionListener(object : MotionLayout.TransitionListener{
+//                    override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
+//                    override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
+//                    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+//                        if (mlRoot.progress == 1F) {
+//                            tvSummaryText.visibility = View.INVISIBLE
+//                            scrollView3.visibility = View.VISIBLE
+//                        }
+//                        if (mlRoot.progress == 0F) {
+//                            tvSummaryText.visibility = View.VISIBLE
+//                            scrollView3.visibility = View.INVISIBLE
+//                        }
+//
+//                    }
+//
+//                    override fun onTransitionTrigger(
+//                        motionLayout: MotionLayout?,
+//                        triggerId: Int,
+//                        positive: Boolean,
+//                        progress: Float
+//                    ) {
+//                    }
+//
+//                })
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     scrollView3.setOnScrollChangeListener { view, scrollX, scrollY, oldX, oldY ->
