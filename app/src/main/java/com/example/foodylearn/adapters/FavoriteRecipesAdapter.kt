@@ -12,7 +12,6 @@ import com.example.foodylearn.databinding.FavoritesRowLayotBinding
 import com.example.foodylearn.presentation.fragments.favorites.FavoriteRecipesFragmentDirections
 import com.example.foodylearn.util.RecipesDiffUtil
 import com.example.foodylearn.viewmodels.MainViewModel
-import kotlinx.android.synthetic.main.favorites_row_layot.view.*
 
 class FavoriteRecipesAdapter(
     private val requireActivity: FragmentActivity,
@@ -26,7 +25,7 @@ class FavoriteRecipesAdapter(
     private var multiSelection = false
     private var selectedRecipes = arrayListOf<FavoritesEntity>()
 
-    class MyViewHolder(private val binding: FavoritesRowLayotBinding) :
+    class MyViewHolder(val binding: FavoritesRowLayotBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(favoritesEntity: FavoritesEntity) {
@@ -57,7 +56,7 @@ class FavoriteRecipesAdapter(
         /**
          * single Click Listener
          */
-        holder.itemView.clFavoritesRecipesRowLayout.setOnClickListener {
+        holder.binding.clFavoritesRecipesRowLayout.setOnClickListener {
             if (multiSelection) {
                 applySelection(holder, currentRecipe)
             } else {
@@ -72,7 +71,7 @@ class FavoriteRecipesAdapter(
         /**
          * Long click
          */
-        holder.itemView.clFavoritesRecipesRowLayout.setOnLongClickListener {
+        holder.binding.clFavoritesRecipesRowLayout.setOnLongClickListener {
             if (!multiSelection) {
                 multiSelection = true
                 requireActivity.startActionMode(this)
@@ -99,7 +98,7 @@ class FavoriteRecipesAdapter(
 
     private fun changeRecipeStyle(holder: MyViewHolder, backgroundColor: Int, strokeColor: Int) {
 //        holder.itemView.clFavoritesRecipesRowLayout.setBackgroundColor(backgroundColor)
-        holder.itemView.cvFavoriteCardContainer.strokeColor =
+        holder.binding.cvFavoriteCardContainer.strokeColor =
             ContextCompat.getColor(requireActivity, strokeColor)
     }
 

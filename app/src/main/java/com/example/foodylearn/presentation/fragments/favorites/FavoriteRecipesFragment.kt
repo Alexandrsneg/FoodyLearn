@@ -10,7 +10,6 @@ import com.example.foodylearn.adapters.FavoriteRecipesAdapter
 import com.example.foodylearn.databinding.FragmentFavoriteRecipesBinding
 import com.example.foodylearn.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_favorite_recipes.view.*
 
 @AndroidEntryPoint
 class FavoriteRecipesFragment : Fragment() {

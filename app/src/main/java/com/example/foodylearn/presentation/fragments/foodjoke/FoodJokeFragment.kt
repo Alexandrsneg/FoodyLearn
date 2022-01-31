@@ -4,19 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.foodylearn.R
 import com.example.foodylearn.data.database.joke.JokeEntity
+import com.example.foodylearn.databinding.FragmentFoodJokeBinding
 import com.example.foodylearn.models.FoodJoke
 import com.example.foodylearn.util.NetworkResult
 import com.example.foodylearn.viewmodels.MainViewModel
-import kotlinx.android.synthetic.main.fragment_food_joke.view.*
 
 class FoodJokeFragment : Fragment() {
 
     private lateinit var mainViewModel: MainViewModel
-    private var mView: View? = null
+
+    private var _binding: FragmentFoodJokeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,38 +28,38 @@ class FoodJokeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_food_joke, container, false)
+        _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
 
         mainViewModel.getJoke()
         mainViewModel.jokeResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Success -> {
-                    mView?.tvJoke?.apply {
+                    binding.tvJoke.apply {
                         text = it.data?.text
                         visibility = View.VISIBLE
                     }
-                    mView?.pbCircleProgress?.visibility = View.GONE
+                    binding.pbCircleProgress.visibility = View.GONE
                     mainViewModel.insertJoke(JokeEntity(1, FoodJoke(it.data?.text)))
                 }
                 is NetworkResult.Error -> {
                     getJokeFromCache()
                 }
                 is NetworkResult.Loading -> {
-                    mView?.pbCircleProgress?.visibility = View.VISIBLE
+                    binding.pbCircleProgress.visibility = View.VISIBLE
                 }
             }
         }
 
-        return mView
+        return binding.root
     }
 
     private fun getJokeFromCache() {
         mainViewModel.readJoke.observe(viewLifecycleOwner) {
             it?.let { joke ->
-                mView?.ivJokeNotFound?.visibility = View.GONE
-                mView?.tvJoke?.apply {
+                binding.ivJokeNotFound.visibility = View.GONE
+                binding.tvJoke.apply {
                     text = joke.joke.text
                     visibility = View.VISIBLE
                 }
@@ -72,7 +73,7 @@ class FoodJokeFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.share) {
-            mView?.tvJoke?.text?.let {
+            binding.tvJoke.text?.let {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, it)

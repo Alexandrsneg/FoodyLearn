@@ -7,55 +7,55 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
-import androidx.constraintlayout.motion.widget.MotionLayout
 import coil.load
-import com.example.foodylearn.R
+import com.example.foodylearn.databinding.FragmentOverViewBinding
 import com.example.foodylearn.models.Result
-import kotlinx.android.synthetic.main.fragment_over_view.view.*
 
 
 class OverViewFragment : Fragment() {
 
     private var firstTriggered = false
 
+    private var _binding: FragmentOverViewBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_over_view, container, false)
+        _binding = FragmentOverViewBinding.inflate(inflater, container, false)
 
         val args = arguments
         val myBundle: Result? = args?.getParcelable("recipeBundle")
 
         myBundle?.let {
             with(view) {
-                ivMainImage.load(it.image)
-                tvTitle.text = it.title
-                tvFavorites.text = it.aggregateLikes.toString()
-                tvMinutes.text = it.readyInMinutes.toString()
-                tvTitle.text = it.title
-                tvSummary.text = Html.fromHtml(it.summary)
-                tvSummaryText.text = Html.fromHtml(it.summary)
+                binding.ivMainImage.load(it.image)
+                binding.tvTitle.text = it.title
+                binding.tvFavorites.text = it.aggregateLikes.toString()
+                binding.tvMinutes.text = it.readyInMinutes.toString()
+                binding.tvTitle.text = it.title
+                binding.tvSummary.text = Html.fromHtml(it.summary)
+                binding.tvSummaryText.text = Html.fromHtml(it.summary)
 
                 if (it.vegetarian)
-                    cvVegetarian.active = true
+                    binding.cvVegetarian.active = true
 
                 if (it.vegan)
-                    cvVegan.active = true
+                    binding.cvVegan.active = true
 
                 if (it.glutenFree == true)
-                    cvGlutenFree.active = true
+                    binding.cvGlutenFree.active = true
 
                 if (it.dairyFree == true)
-                    cvDairyFree.active = true
+                   binding.cvDairyFree.active = true
 
                 if (it.veryHealthy)
-                    cvHealthy.active = true
+                    binding.cvHealthy.active = true
 
                 if (it.cheap == true)
-                    cvCheap.active = true
+                    binding.cvCheap.active = true
 
 //                scrollView3.viewTreeObserver.addOnScrollChangedListener {
 //
@@ -91,7 +91,7 @@ class OverViewFragment : Fragment() {
 //                })
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    scrollView3.setOnScrollChangeListener { view, scrollX, scrollY, oldX, oldY ->
+                    binding.scrollView3.setOnScrollChangeListener { view, scrollX, scrollY, oldX, oldY ->
 //                        if (scrollY >= oldY && mlRoot.progress == 0F) {
 //                            //на верху
 //                            tvSummaryText.visibility = View.VISIBLE
@@ -99,9 +99,9 @@ class OverViewFragment : Fragment() {
 //                            mlRoot.transitionToEnd()
 //                        }
 
-                        if (!scrollView3.canScrollVertically(-1) && mlRoot.progress == 1F) {
+                        if (!binding.scrollView3.canScrollVertically(-1) && binding.mlRoot.progress == 1F) {
                             // top of scroll view
-                            mlRoot.transitionToStart()
+                            binding.mlRoot.transitionToStart()
 //                            tvSummaryText.visibility = View.VISIBLE
 //                            scrollView3.visibility = View.INVISIBLE
                         }
@@ -112,6 +112,11 @@ class OverViewFragment : Fragment() {
         }
 
 
-        return view
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

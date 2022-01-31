@@ -6,31 +6,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
-import com.example.foodylearn.R
+import com.example.foodylearn.databinding.FragmentInstructionsBinding
 import com.example.foodylearn.models.Result
 import com.example.foodylearn.util.Constants
-import kotlinx.android.synthetic.main.fragment_instructions.view.*
 
 class InstructionsFragment : Fragment() {
+
+    private var _binding: FragmentInstructionsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_instructions, container, false)
+        _binding = FragmentInstructionsBinding.inflate(inflater, container, false)
 
         val args = arguments
         val myBundle: Result? = args?.getParcelable(Constants.RECIPE_RESULT_KEY)
 
-        view.wvInstructions.webViewClient = object : WebViewClient() {
+        binding.wvInstructions.webViewClient = object : WebViewClient() {
 
         }
         myBundle?.spoonacularSourceUrl?.let {
-            view.wvInstructions.loadUrl(it)
+            binding.wvInstructions.loadUrl(it)
         }
 
-        return view;
+        return binding.root;
     }
 
 }

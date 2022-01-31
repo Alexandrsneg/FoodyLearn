@@ -1,12 +1,11 @@
 package com.example.foodylearn.presentation.fragments.overview
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.foodylearn.R
-import kotlinx.android.synthetic.main.view_category.view.*
+import com.example.foodylearn.databinding.ViewCategoryBinding
 
 class CategoryView @JvmOverloads constructor(
     context: Context,
@@ -14,7 +13,13 @@ class CategoryView @JvmOverloads constructor(
 ) :
     LinearLayout(context, attrs) {
 
-    private var view = inflate(context, R.layout.view_category, this)
+    private var binding: ViewCategoryBinding =
+        ViewCategoryBinding.inflate(LayoutInflater.from(context), this, true)
+
+    init {
+        //        addView(binding.root)
+    }
+
 
      var active = false
         set(value) {
@@ -24,14 +29,14 @@ class CategoryView @JvmOverloads constructor(
             if (!value)
                 color = R.color.categoryColor
 
-           view.ivCheckCircle.setColorFilter(resources.getColor(color))
-           view.tvCategoryTitle.setTextColor(resources.getColor(color))
+           binding.ivCheckCircle.setColorFilter(resources.getColor(color))
+           binding.tvCategoryTitle.setTextColor(resources.getColor(color))
         }
 
      var title = ""
         set(value) {
             field = value
-            view.tvCategoryTitle.text = value
+            binding.tvCategoryTitle.text = value
         }
 
     init {
