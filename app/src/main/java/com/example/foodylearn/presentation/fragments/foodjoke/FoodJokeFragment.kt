@@ -3,6 +3,15 @@ package com.example.foodylearn.presentation.fragments.foodjoke
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.foodylearn.R
@@ -34,6 +43,9 @@ class FoodJokeFragment : Fragment() {
 
         mainViewModel.getJoke()
         mainViewModel.jokeResponse.observe(viewLifecycleOwner) {
+            binding.tvJoke.setContent {
+
+            }
             when (it) {
                 is NetworkResult.Success -> {
                     binding.tvJoke.apply {
@@ -88,6 +100,18 @@ class FoodJokeFragment : Fragment() {
             return super.onOptionsItemSelected(item)
         }
     }
+//
+//    @Composable
+//    private fun Greeting() {
+//        Text(
+//            text = "Joke",
+//            style = MaterialTheme.typography.h5,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(horizontal = 8.dp)
+//                .wrapContentWidth(Alignment.CenterHorizontally)
+//        )
+//    }
 
 
 }
