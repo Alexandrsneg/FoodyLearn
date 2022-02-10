@@ -64,7 +64,7 @@ class DetailsActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
         val menuItem = menu?.findItem(R.id.menu_favorite)
         checkSavesRecipe(menuItem)

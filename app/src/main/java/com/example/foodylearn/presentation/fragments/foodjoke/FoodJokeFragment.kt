@@ -20,6 +20,7 @@ import com.example.foodylearn.databinding.FragmentFoodJokeBinding
 import com.example.foodylearn.models.FoodJoke
 import com.example.foodylearn.util.NetworkResult
 import com.example.foodylearn.viewmodels.MainViewModel
+import java.util.*
 
 class FoodJokeFragment : Fragment() {
 
@@ -43,9 +44,6 @@ class FoodJokeFragment : Fragment() {
 
         mainViewModel.getJoke()
         mainViewModel.jokeResponse.observe(viewLifecycleOwner) {
-            binding.tvJoke.setContent {
-
-            }
             when (it) {
                 is NetworkResult.Success -> {
                     binding.tvJoke.apply {
