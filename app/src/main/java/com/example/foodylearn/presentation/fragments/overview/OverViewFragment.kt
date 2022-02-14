@@ -37,7 +37,7 @@ class OverViewFragment : Fragment() {
                 binding.tvMinutes.text = it.readyInMinutes.toString()
                 binding.tvTitle.text = it.title
                 binding.tvSummary.text = Html.fromHtml(it.summary)
-                binding.tvSummaryText.text = Html.fromHtml(it.summary)
+//                binding.tvSummaryText.text = Html.fromHtml(it.summary)
 
                 if (it.vegetarian)
                     binding.cvVegetarian.active = true
@@ -89,25 +89,25 @@ class OverViewFragment : Fragment() {
 //                    }
 //
 //                })
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    binding.scrollView3.setOnScrollChangeListener { view, scrollX, scrollY, oldX, oldY ->
-//                        if (scrollY >= oldY && mlRoot.progress == 0F) {
-//                            //на верху
-//                            tvSummaryText.visibility = View.VISIBLE
-//                            scrollView3.visibility = View.INVISIBLE
-//                            mlRoot.transitionToEnd()
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    binding.scrollView3.setOnScrollChangeListener { view, scrollX, scrollY, oldX, oldY ->
+////                        if (scrollY >= oldY && mlRoot.progress == 0F) {
+////                            //на верху
+////                            tvSummaryText.visibility = View.VISIBLE
+////                            scrollView3.visibility = View.INVISIBLE
+////                            mlRoot.transitionToEnd()
+////                        }
+//
+//                        if (!binding.scrollView3.canScrollVertically(-1) && binding.mlRoot.progress == 1F) {
+//                            // top of scroll view
+//                            binding.mlRoot.transitionToStart()
+////                            tvSummaryText.visibility = View.VISIBLE
+////                            scrollView3.visibility = View.INVISIBLE
 //                        }
-
-                        if (!binding.scrollView3.canScrollVertically(-1) && binding.mlRoot.progress == 1F) {
-                            // top of scroll view
-                            binding.mlRoot.transitionToStart()
-//                            tvSummaryText.visibility = View.VISIBLE
-//                            scrollView3.visibility = View.INVISIBLE
-                        }
-
-                    }
-                }
+//
+//                    }
+//                }
             }
         }
 
