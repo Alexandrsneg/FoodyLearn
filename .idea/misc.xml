@@ -12,6 +12,7 @@
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/recipies_row_layout.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.174" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.134375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14375" />
         <entry key="app/src/main/res/layout/favorites_row_layot.xml" value="0.3925925925925926" />
         <entry key="app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.3328125" />
@@ -23,6 +24,7 @@
         <entry key="app/src/main/res/layout/recipes_bottom_sheet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recipies_row_layout.xml" value="0.3328125" />
         <entry key="app/src/main/res/layout/view_category.xml" value="0.26927083333333335" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21302083333333333" />
         <entry key="app/src/main/res/menu/favorites_contextual_menu.xml" value="0.3333333333333333" />
       </map>
     </option>

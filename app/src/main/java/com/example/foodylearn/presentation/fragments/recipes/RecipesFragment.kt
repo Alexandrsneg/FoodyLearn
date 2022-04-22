@@ -26,7 +26,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
-    private val args by navArgs<RecipesFragmentArgs>()
+//    private val args by navArgs<RecipesFragmentArgs>() нельзя чистить или менять
+    private var args: Boolean = false
 
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
@@ -54,6 +55,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
+
+        args = arguments?.getBoolean("backFromBottomSheet") ?: false
 
         setHasOptionsMenu(true)
 
@@ -114,11 +117,12 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) {
-                if (it.isNotEmpty() && !args.backFromBottomSheet) {
+                if (it.isNotEmpty() && !args) {
                     mAdapter.setData(it[0].foodRecipes)
                     showShimmerEffect(false)
                 } else {
                     requestApiData(false)
+                    arguments?.clear()
                 }
             }
         }
