@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_blank.xml" value="0.2" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.1" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_food_joke.xml" value="0.2" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_ingredient.xml" value="0.17916666666666667" />
