@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodylearn.R
-import com.example.foodylearn.adapters.FavoriteRecipesAdapter
+import com.example.foodylearn.presentation.adapters.FavoriteRecipesAdapter
 import com.example.foodylearn.databinding.FragmentFavoriteRecipesBinding
-import com.example.foodylearn.viewmodels.MainViewModel
+import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -11,14 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foodylearn.viewmodels.MainViewModel
+import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import com.example.foodylearn.R
-import com.example.foodylearn.adapters.RecipesAdapter
+import com.example.foodylearn.presentation.adapters.RecipesAdapter
 import com.example.foodylearn.databinding.FragmentRecipesBinding
 import com.example.foodylearn.util.NetworkListener
 import com.example.foodylearn.util.NetworkResult
 import com.example.foodylearn.util.observeOnce
-import com.example.foodylearn.viewmodels.RecipesViewModel
+import com.example.foodylearn.presentation.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

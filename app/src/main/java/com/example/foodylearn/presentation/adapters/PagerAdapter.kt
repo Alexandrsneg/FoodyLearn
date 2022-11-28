@@ -1,4 +1,4 @@
-package com.example.foodylearn.adapters
+package com.example.foodylearn.presentation.adapters
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

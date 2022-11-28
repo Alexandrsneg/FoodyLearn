@@ -1,4 +1,4 @@
-package com.example.foodylearn.adapters
+package com.example.foodylearn.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

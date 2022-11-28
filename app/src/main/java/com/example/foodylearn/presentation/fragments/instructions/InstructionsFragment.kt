@@ -19,20 +19,15 @@ class InstructionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         // Inflate the layout for this fragment
         _binding = FragmentInstructionsBinding.inflate(inflater, container, false)
 
-        val args = arguments
-        val myBundle: Result? = args?.getParcelable(Constants.RECIPE_RESULT_KEY)
+        val myBundle: Result? = arguments?.getParcelable(Constants.RECIPE_RESULT_KEY)
 
-        binding.wvInstructions.webViewClient = object : WebViewClient() {
-
-        }
+        binding.wvInstructions.webViewClient = object : WebViewClient() {}
         myBundle?.spoonacularSourceUrl?.let {
             binding.wvInstructions.loadUrl(it)
         }
-
         return binding.root;
     }
 

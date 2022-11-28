@@ -1,4 +1,4 @@
-package com.example.foodylearn.bindingadapters
+package com.example.foodylearn.presentation.data_binding_adapters
 
 import android.widget.ImageView
 import android.widget.TextView

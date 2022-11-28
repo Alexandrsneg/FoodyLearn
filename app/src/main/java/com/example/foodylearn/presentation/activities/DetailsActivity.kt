@@ -1,4 +1,4 @@
-package com.example.foodylearn.presentation
+package com.example.foodylearn.presentation.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment
 
 import androidx.navigation.navArgs
 import com.example.foodylearn.R
-import com.example.foodylearn.adapters.PagerAdapter
+import com.example.foodylearn.presentation.adapters.PagerAdapter
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 import com.example.foodylearn.databinding.ActivityDetailsBinding
 import com.example.foodylearn.presentation.fragments.ingredients.IngredientFragment
 import com.example.foodylearn.presentation.fragments.instructions.InstructionsFragment
 import com.example.foodylearn.presentation.fragments.overview.OverViewFragment
-import com.example.foodylearn.viewmodels.MainViewModel
+import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.foodylearn.databinding.RecipesBottomSheetBinding
 import com.example.foodylearn.util.Constants
-import com.example.foodylearn.viewmodels.RecipesViewModel
+import com.example.foodylearn.presentation.viewmodels.RecipesViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -49,12 +52,12 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         }
 
         //можно с помощью котлин флоу
-//        lifecycleScope.launchWhenCreated {
+//        lifecycleScope.launch {
 //            recipesViewModel.readMealAndDietType.collect {
 //                mealTypeChip = it.selectedMealType
 //                dietTypeChip = it.selectedDietType
-//                updateChip(it.selectedMealTypeId, mView.cgMealsChipsContainer)
-//                updateChip(it.selectedDietTypeId, mView.cgDietChipsContainer)
+//                updateChip(it.selectedMealTypeId, binding.cgMealsChipsContainer)
+//                updateChip(it.selectedDietTypeId, binding.cgDietChipsContainer)
 //            }
 //        }
 

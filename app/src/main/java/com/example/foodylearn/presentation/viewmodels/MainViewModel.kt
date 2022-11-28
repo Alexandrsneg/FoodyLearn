@@ -1,4 +1,4 @@
-package com.example.foodylearn.viewmodels
+package com.example.foodylearn.presentation.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -65,11 +65,11 @@ class MainViewModel @Inject constructor(
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipes>> = MutableLiveData()
     var jokeResponse: MutableLiveData<NetworkResult<FoodJoke>> = MutableLiveData()
 
-    fun getRecipes(queries: Map<String, String>, isSearch: Boolean) = viewModelScope.launch {
+    fun getRecipes(queries: Map<String, String>, isSearch: Boolean) = viewModelScope.launch(Dispatchers.Main) {
         getRecipesSafeCall(queries, isSearch)
     }
 
-    fun getJoke() = viewModelScope.launch {
+    fun getJoke() = viewModelScope.launch(Dispatchers.Main) {
         getJokeFromRest()
     }
 

@@ -1,4 +1,4 @@
-package com.example.foodylearn.presentation
+package com.example.foodylearn.presentation.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

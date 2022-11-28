@@ -1,11 +1,11 @@
-package com.example.foodylearn.bindingadapters
+package com.example.foodylearn.presentation.data_binding_adapters
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodylearn.adapters.FavoriteRecipesAdapter
+import com.example.foodylearn.presentation.adapters.FavoriteRecipesAdapter
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 
 class FavoriteRecipesBinding {

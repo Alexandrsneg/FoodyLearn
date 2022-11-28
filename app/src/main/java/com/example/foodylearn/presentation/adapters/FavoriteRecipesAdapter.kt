@@ -1,4 +1,4 @@
-package com.example.foodylearn.adapters
+package com.example.foodylearn.presentation.adapters
 
 import android.view.*
 import androidx.core.content.ContextCompat
@@ -11,7 +11,7 @@ import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 import com.example.foodylearn.databinding.FavoritesRowLayotBinding
 import com.example.foodylearn.presentation.fragments.favorites.FavoriteRecipesFragmentDirections
 import com.example.foodylearn.util.RecipesDiffUtil
-import com.example.foodylearn.viewmodels.MainViewModel
+import com.example.foodylearn.presentation.viewmodels.MainViewModel
 
 class FavoriteRecipesAdapter(
     private val requireActivity: FragmentActivity,
@@ -158,8 +158,6 @@ class FavoriteRecipesAdapter(
     }
 
     fun closeActionMenu(){
-        mActionMode?.let {
-            it.finish()
-        }
+        mActionMode?.finish()
     }
 }

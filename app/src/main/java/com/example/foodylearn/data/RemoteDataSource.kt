@@ -3,6 +3,8 @@ package com.example.foodylearn.data
 import com.example.foodylearn.data.network.FoodRecipesApi
 import com.example.foodylearn.models.FoodJoke
 import com.example.foodylearn.models.FoodRecipes
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -10,14 +12,18 @@ class RemoteDataSource @Inject constructor(
     private val foodRecipesApi: FoodRecipesApi
 ) {
 
-     suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipes> {
-        return foodRecipesApi.getRecipes(queries)
-    }
+     suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipes> =
+         withContext(Dispatchers.IO) {
+            foodRecipesApi.getRecipes(queries)
+         }
 
-    suspend fun searchRecipes(queries: Map<String, String>): Response<FoodRecipes> {
-        return foodRecipesApi.searchRecipes(queries)
-    }
+    suspend fun searchRecipes(queries: Map<String, String>): Response<FoodRecipes> =
+         withContext(Dispatchers.IO) {
+            foodRecipesApi.searchRecipes(queries)
+        }
 
     suspend fun getJoke(apiKey: String): Response<FoodJoke> =
-        foodRecipesApi.getJoke(apiKey)
+        withContext(Dispatchers.IO) {
+            foodRecipesApi.getJoke(apiKey)
+        }
 }

@@ -1,4 +1,4 @@
-package com.example.foodylearn.viewmodels
+package com.example.foodylearn.presentation.viewmodels
 
 import android.app.Application
 import android.widget.Toast

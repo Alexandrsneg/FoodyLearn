@@ -25,7 +25,7 @@ import com.example.foodylearn.databinding.FragmentFoodJokeBinding
 import com.example.foodylearn.models.FoodJoke
 import com.example.foodylearn.presentation.fragments.foodjoke.composable.CardWithJoke
 import com.example.foodylearn.util.NetworkResult
-import com.example.foodylearn.viewmodels.MainViewModel
+import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import java.util.*
 
 
