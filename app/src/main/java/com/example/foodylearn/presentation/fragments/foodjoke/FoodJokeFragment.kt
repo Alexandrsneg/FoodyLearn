@@ -5,25 +5,13 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.foodylearn.R
-import com.example.foodylearn.data.database.joke.JokeEntity
 import com.example.foodylearn.databinding.FragmentFoodJokeBinding
-import com.example.foodylearn.models.FoodJoke
-import com.example.foodylearn.presentation.fragments.foodjoke.composable.CardWithJoke
+import com.example.foodylearn.data.models.FoodJoke
 import com.example.foodylearn.util.NetworkResult
 import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import java.util.*
@@ -67,7 +55,12 @@ class FoodJokeFragment : Fragment() {
                         visibility = View.VISIBLE
                     }
 //                    binding.pbCircleProgress.visibility = View.GONE
-                    mainViewModel.insertJoke(JokeEntity(1, FoodJoke(it.data?.text)))
+                    mainViewModel.insertJoke(
+                        com.example.foodylearn.data.database.joke.JokeEntity(
+                            1,
+                            FoodJoke(it.data?.text)
+                        )
+                    )
                 }
                 is NetworkResult.Error -> {
                     getJokeFromCache()

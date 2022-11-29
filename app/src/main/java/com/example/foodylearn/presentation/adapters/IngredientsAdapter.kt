@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodylearn.databinding.IngredientsRowLayoutBinding
-import com.example.foodylearn.models.ExtendedIngredient
+import com.example.foodylearn.data.models.ExtendedIngredient
 import com.example.foodylearn.util.RecipesDiffUtil
 
 class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>() {

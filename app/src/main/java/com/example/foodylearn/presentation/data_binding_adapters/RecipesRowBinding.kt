@@ -11,7 +11,7 @@ import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import coil.load
 import com.example.foodylearn.R
-import com.example.foodylearn.models.Result
+import com.example.foodylearn.data.models.Result
 import com.example.foodylearn.presentation.fragments.recipes.RecipesFragmentDirections
 
 class RecipesRowBinding {

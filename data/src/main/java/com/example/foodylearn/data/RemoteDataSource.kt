@@ -1,8 +1,8 @@
 package com.example.foodylearn.data
 
+import com.example.foodylearn.data.models.FoodJoke
+import com.example.foodylearn.data.models.FoodRecipes
 import com.example.foodylearn.data.network.FoodRecipesApi
-import com.example.foodylearn.models.FoodJoke
-import com.example.foodylearn.models.FoodRecipes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response

@@ -10,9 +10,8 @@ import androidx.lifecycle.*
 import com.example.foodylearn.data.Repository
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 import com.example.foodylearn.data.database.joke.JokeEntity
-import com.example.foodylearn.data.database.recipes.RecipesEntity
-import com.example.foodylearn.models.FoodJoke
-import com.example.foodylearn.models.FoodRecipes
+import com.example.foodylearn.data.models.FoodJoke
+import com.example.foodylearn.data.models.FoodRecipes
 import com.example.foodylearn.util.Constants
 import com.example.foodylearn.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,11 +29,11 @@ class MainViewModel @Inject constructor(
 
 
     /** ROOM */
-    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
-    val readFavoriteRecipes: LiveData<List<FavoritesEntity>> = repository.local.readFavoriteRecipes().asLiveData()
-    val readJoke: LiveData<JokeEntity?> = repository.local.readJoke().asLiveData()
+    val readRecipes: LiveData<List<com.example.foodylearn.data.database.recipes.RecipesEntity>> = repository.local.readRecipes().asLiveData()
+    val readFavoriteRecipes: LiveData<List<com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity>> = repository.local.readFavoriteRecipes().asLiveData()
+    val readJoke: LiveData<com.example.foodylearn.data.database.joke.JokeEntity?> = repository.local.readJoke().asLiveData()
 
-    private fun insertRecipes(recipesEntity: RecipesEntity) =
+    private fun insertRecipes(recipesEntity: com.example.foodylearn.data.database.recipes.RecipesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRecipes(recipesEntity)
         }
@@ -95,7 +94,7 @@ class MainViewModel @Inject constructor(
             recipesResponse.value = handleFoodRecipesResponse(response)
 
             recipesResponse.value?.data?.let {
-                insertRecipes(RecipesEntity(it))
+                insertRecipes(com.example.foodylearn.data.database.recipes.RecipesEntity(it))
             }
         } catch (e: Exception) {
             recipesResponse.value = NetworkResult.Error(e.message)

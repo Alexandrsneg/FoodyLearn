@@ -101,7 +101,10 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun saveFavorite(item: MenuItem) {
-        val favoritesEntity = FavoritesEntity(args.result.id ?: 0, args.result)
+        val favoritesEntity =
+            com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity(
+                args.result.id ?: 0, args.result
+            )
         mainViewModel.insertFavorites(favoritesEntity)
 
         changeItemColor(item, R.color.yellow)

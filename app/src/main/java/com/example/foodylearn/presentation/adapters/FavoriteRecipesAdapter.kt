@@ -18,7 +18,7 @@ class FavoriteRecipesAdapter(
     private val mainViewModel: MainViewModel
 ) : RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>(), android.view.ActionMode.Callback {
 
-    private var favoriteRecipes = arrayListOf<FavoritesEntity>()
+    private var favoriteRecipes = arrayListOf<com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity>()
     private var mActionMode: ActionMode? = null
 
     private var myViewHolders = arrayListOf<MyViewHolder>()
@@ -85,7 +85,7 @@ class FavoriteRecipesAdapter(
 
     }
 
-    private fun applySelection(holder: MyViewHolder, currentRecipe: FavoritesEntity) {
+    private fun applySelection(holder: MyViewHolder, currentRecipe: com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
             changeRecipeStyle(holder, R.color.cardview_light_background, R.color.lightMediumGray)

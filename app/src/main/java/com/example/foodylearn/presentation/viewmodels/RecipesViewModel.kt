@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     application: Application,
-    private val dataStoreRepository: DataStoreRepository
+    private val dataStoreRepository: com.example.foodylearn.data.DataStoreRepository
 ): AndroidViewModel(application) {
 
     private var mealType = Constants.DEFAULT_MEAL_TYPE

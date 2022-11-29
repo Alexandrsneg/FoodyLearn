@@ -1,7 +1,7 @@
 package com.example.foodylearn.data.network
 
-import com.example.foodylearn.models.FoodJoke
-import com.example.foodylearn.models.FoodRecipes
+import com.example.foodylearn.data.models.FoodJoke
+import com.example.foodylearn.data.models.FoodRecipes
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

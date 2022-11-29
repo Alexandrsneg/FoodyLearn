@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodylearn.presentation.adapters.IngredientsAdapter
 import com.example.foodylearn.databinding.FragmentIngredientBinding
-import com.example.foodylearn.models.Result
+import com.example.foodylearn.data.models.Result
 import com.example.foodylearn.util.Constants
 
 class IngredientFragment : Fragment() {

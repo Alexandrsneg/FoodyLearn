@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import com.example.foodylearn.databinding.FragmentInstructionsBinding
-import com.example.foodylearn.models.Result
+import com.example.foodylearn.data.models.Result
 import com.example.foodylearn.util.Constants
 
 class InstructionsFragment : Fragment() {

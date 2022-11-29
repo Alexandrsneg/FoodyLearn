@@ -1,10 +1,9 @@
 package com.example.foodylearn.data.database.favorites.favorites
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.foodylearn.models.Result
-import com.example.foodylearn.util.Constants
+import com.example.foodylearn.data.Constants
+import com.example.foodylearn.data.models.Result
 
 @Entity(tableName = Constants.FAVORITES_TABLE)
 class FavoritesEntity(

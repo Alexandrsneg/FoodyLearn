@@ -4,8 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.foodylearn.data.database.recipes.RecipesEntity
-import com.example.foodylearn.models.FoodRecipes
+import com.example.foodylearn.data.models.FoodRecipes
 import com.example.foodylearn.util.NetworkResult
 
 class RecipesBinding {
@@ -16,7 +15,7 @@ class RecipesBinding {
         fun errorImageViewVisibility(
             imageView: ImageView,
             apiResponse: NetworkResult<FoodRecipes>?,
-            dataBase: List<RecipesEntity>?
+            dataBase: List<com.example.foodylearn.data.database.recipes.RecipesEntity>?
         ) {
             if (apiResponse is NetworkResult.Error && dataBase.isNullOrEmpty())
                 imageView.visibility = View.VISIBLE
@@ -32,7 +31,7 @@ class RecipesBinding {
         fun errorTextVisibility(
             textView: TextView,
             apiResponse: NetworkResult<FoodRecipes>?,
-            dataBase: List<RecipesEntity>?
+            dataBase: List<com.example.foodylearn.data.database.recipes.RecipesEntity>?
         ) {
             if (apiResponse is NetworkResult.Error && dataBase.isNullOrEmpty()){
                 textView.visibility = View.VISIBLE

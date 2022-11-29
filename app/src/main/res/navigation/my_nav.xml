@@ -51,6 +51,6 @@
         tools:layout="@layout/activity_details" >
         <argument
             android:name="result"
-            app:argType="com.example.foodylearn.models.Result" />
+            app:argType="com.example.foodylearn.data.models.Result" />
     </activity>
 </navigation>

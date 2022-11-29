@@ -15,7 +15,7 @@ class FavoriteRecipesBinding {
         @JvmStatic
         fun setDataAndViewVisibility(
             view: View,
-            favoritesEntity: List<FavoritesEntity>?,
+            favoritesEntity: List<com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity>?,
             mAdapter: FavoriteRecipesAdapter?
         ) {
             if (favoritesEntity.isNullOrEmpty()) {

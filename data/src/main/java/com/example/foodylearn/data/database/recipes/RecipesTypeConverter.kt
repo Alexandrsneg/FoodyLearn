@@ -1,7 +1,7 @@
 package com.example.foodylearn.data.database.recipes
 
 import androidx.room.TypeConverter
-import com.example.foodylearn.models.FoodRecipes
+import com.example.foodylearn.data.models.FoodRecipes
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

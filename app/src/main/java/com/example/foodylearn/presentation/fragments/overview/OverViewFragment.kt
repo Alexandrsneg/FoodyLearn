@@ -1,6 +1,5 @@
 package com.example.foodylearn.presentation.fragments.overview
 
-import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.Fragment
@@ -9,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import coil.load
 import com.example.foodylearn.databinding.FragmentOverViewBinding
-import com.example.foodylearn.models.Result
+import com.example.foodylearn.data.models.Result
 
 
 class OverViewFragment : Fragment() {
