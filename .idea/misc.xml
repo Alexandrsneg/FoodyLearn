@@ -4,12 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_blank.xml" value="0.2" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.1" />
-        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_food_joke.xml" value="0.25" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_food_joke.xml" value="0.2" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_ingredient.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/fragment_recipes.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/ingredients_row_layout.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/recipies_row_layout.xml" value="0.1" />
+        <entry key="..\:/Users/aikps/AndroidStudioProjects/FoodyLearn/app/src/main/res/layout/view_category.xml" value="0.5" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.174" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.134375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14375" />

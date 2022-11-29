@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import com.example.foodylearn.databinding.FragmentInstructionsBinding
-import com.example.foodylearn.models.Result
+import com.example.foodylearn.data.models.Result
 import com.example.foodylearn.util.Constants
 
 class InstructionsFragment : Fragment() {
@@ -19,20 +19,15 @@ class InstructionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         // Inflate the layout for this fragment
         _binding = FragmentInstructionsBinding.inflate(inflater, container, false)
 
-        val args = arguments
-        val myBundle: Result? = args?.getParcelable(Constants.RECIPE_RESULT_KEY)
+        val myBundle: Result? = arguments?.getParcelable(Constants.RECIPE_RESULT_KEY)
 
-        binding.wvInstructions.webViewClient = object : WebViewClient() {
-
-        }
+        binding.wvInstructions.webViewClient = object : WebViewClient() {}
         myBundle?.spoonacularSourceUrl?.let {
             binding.wvInstructions.loadUrl(it)
         }
-
         return binding.root;
     }
 

@@ -15,12 +15,15 @@
         android:theme="@style/SplashScreenStyle"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.DetailsActivity"
-            android:label="Details"
-            android:theme="@style/DetailsActivityStyle"
-            android:exported="true" />
+            android:name=".viewmodels.MainActivity"
+            android:exported="false" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.activities.DetailsActivity"
+            android:exported="true"
+            android:label="Details"
+            android:theme="@style/DetailsActivityStyle" />
+        <activity
+            android:name=".presentation.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

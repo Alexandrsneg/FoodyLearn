@@ -5,7 +5,7 @@
     <data>
         <variable
             name="ingredient"
-            type="com.example.foodylearn.models.ExtendedIngredient" />
+            type="com.example.foodylearn.data.models.ExtendedIngredient" />
 
     </data>
 

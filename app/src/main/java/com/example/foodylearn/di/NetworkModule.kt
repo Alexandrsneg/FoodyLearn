@@ -50,8 +50,8 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit): FoodRecipesApi {
-        return retrofit.create(FoodRecipesApi::class.java)
+    fun provideApiService(retrofit: Retrofit): com.example.foodylearn.data.network.FoodRecipesApi {
+        return retrofit.create(com.example.foodylearn.data.network.FoodRecipesApi::class.java)
     }
 
 }

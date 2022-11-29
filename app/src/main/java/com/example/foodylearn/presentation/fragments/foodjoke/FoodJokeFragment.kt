@@ -5,15 +5,15 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
+import androidx.compose.ui.text.font.Font
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.foodylearn.R
-import com.example.foodylearn.data.database.joke.JokeEntity
 import com.example.foodylearn.databinding.FragmentFoodJokeBinding
-import com.example.foodylearn.models.FoodJoke
+import com.example.foodylearn.data.models.FoodJoke
 import com.example.foodylearn.util.NetworkResult
-import com.example.foodylearn.viewmodels.MainViewModel
+import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import java.util.*
 
 
@@ -28,6 +28,7 @@ class FoodJokeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         setHasOptionsMenu(true)
+        val font = Font(R.font.courgette)
     }
 
     override fun onCreateView(
@@ -37,22 +38,35 @@ class FoodJokeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
 
+//        binding.greeting.setContent {
+//            CardWithJoke(joke = "")
+//        }
+
         mainViewModel.getJoke()
         mainViewModel.jokeResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Success -> {
-                    binding.tvJoke.apply {
-                        text = it.data?.text
+//                    binding.tvJoke.apply {
+//                        text = it.data?.text
+//                        visibility = View.VISIBLE
+//                    }
+                    binding.greeting.apply {
+                        joke = it.data?.text ?: "fail"
                         visibility = View.VISIBLE
                     }
-                    binding.pbCircleProgress.visibility = View.GONE
-                    mainViewModel.insertJoke(JokeEntity(1, FoodJoke(it.data?.text)))
+//                    binding.pbCircleProgress.visibility = View.GONE
+                    mainViewModel.insertJoke(
+                        com.example.foodylearn.data.database.joke.JokeEntity(
+                            1,
+                            FoodJoke(it.data?.text)
+                        )
+                    )
                 }
                 is NetworkResult.Error -> {
                     getJokeFromCache()
                 }
                 is NetworkResult.Loading -> {
-                    binding.pbCircleProgress.visibility = View.VISIBLE
+//                    binding.pbCircleProgress.visibility = View.VISIBLE
                 }
             }
         }
@@ -80,10 +94,14 @@ class FoodJokeFragment : Fragment() {
 
     private fun getJokeFromCache() {
         mainViewModel.readJoke.observe(viewLifecycleOwner) {
-            it?.let { joke ->
+            it?.let { cachedJoke ->
                 binding.ivJokeNotFound.visibility = View.GONE
-                binding.tvJoke.apply {
-                    text = joke.joke.text
+//                binding.tvJoke.apply {
+//                    text = joke.joke.text
+//                    visibility = View.VISIBLE
+//                }
+                binding.greeting.apply {
+                    joke = cachedJoke.joke.text ?: "cache fail"
                     visibility = View.VISIBLE
                 }
             }
@@ -96,13 +114,12 @@ class FoodJokeFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.share) {
-            binding.tvJoke.text?.let {
+            binding.greeting.joke.let {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, it)
                     type = "text/plain"
                 }
-
                 val shareIntent = Intent.createChooser(sendIntent, null)
                 startActivity(shareIntent)
             }
@@ -119,7 +136,7 @@ class FoodJokeFragment : Fragment() {
         else
             binding.btnNotifications.visibility = View.GONE
     }
-//
+
 //    @Composable
 //    private fun Greeting() {
 //        Text(

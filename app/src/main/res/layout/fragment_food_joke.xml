@@ -9,62 +9,62 @@
     android:background="@drawable/food_joke_background_dark"
     tools:context=".presentation.fragments.foodjoke.FoodJokeFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/strokeColor"
-        app:strokeWidth="1dp">
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:id="@+id/materialCardView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        app:cardCornerRadius="8dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:strokeColor="@color/strokeColor"-->
+<!--        app:strokeWidth="1dp">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardBackgroundColor">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/cardBackgroundColor">-->
 
-            <ScrollView
-                android:id="@+id/scrollView2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0">
+<!--            <ScrollView-->
+<!--                android:id="@+id/scrollView2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="1.0">-->
 
-                <TextView
-                    android:id="@+id/tvJoke"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/courgette"
-                    android:padding="8dp"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:textColor="@color/titleColor"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke " />
-            </ScrollView>
+<!--                <TextView-->
+<!--                    android:id="@+id/tvJoke"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/courgette"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:visibility="gone"-->
+<!--                    tools:visibility="visible"-->
+<!--                    android:textColor="@color/titleColor"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    tools:text="Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke Joke " />-->
+<!--            </ScrollView>-->
 
 
-            <ProgressBar
-                android:id="@+id/pbCircleProgress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:visibility="gone"
-                app:layout_constraintTop_toTopOf="@+id/scrollView2" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/pbCircleProgress"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/scrollView2" />-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-    </com.google.android.material.card.MaterialCardView>
+<!--    </com.google.android.material.card.MaterialCardView>-->
 
     <ImageView
         android:id="@+id/ivJokeNotFound"
@@ -84,7 +84,16 @@
         android:layout_height="wrap_content"
         android:text="Go to settings"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/materialCardView"
+        app:layout_constraintBottom_toTopOf="@+id/greeting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.foodylearn.presentation.fragments.foodjoke.composable.CardWithJokeView
+        android:id="@+id/greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
