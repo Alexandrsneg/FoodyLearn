@@ -18,7 +18,7 @@ class CardWithJokeView @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        CardWithJoke(joke = joke)
+        CardWithJoke(joke = joke, context)
     }
 
 

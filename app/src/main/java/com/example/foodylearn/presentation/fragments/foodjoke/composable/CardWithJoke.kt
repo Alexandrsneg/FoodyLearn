@@ -1,5 +1,6 @@
 package com.example.foodylearn.presentation.fragments.foodjoke.composable
 
+import android.content.Context
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,10 +17,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.res.ResourcesCompat
 import com.example.foodylearn.R
 
 @Composable
-fun CardWithJoke(joke: String) {
+fun CardWithJoke(joke: String, context: Context?) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,7 +38,11 @@ fun CardWithJoke(joke: String) {
                 .verticalScroll(
                     state = rememberScrollState()
                 ),
-            fontFamily = FontFamily(Font(R.font.courgette)),
+            fontFamily = context?.let {
+                ResourcesCompat.getFont(it, R.font.courgette)?.let { typeFace ->
+                    FontFamily(typeFace)
+                }
+            },
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color(R.color.titleColor)
@@ -47,5 +53,5 @@ fun CardWithJoke(joke: String) {
 @Preview(showBackground = false)
 @Composable
 fun DefaultPreview() {
-    CardWithJoke("sdksnfkjsdn ssdngksngkjsn sdgnsldgnlsg")
+    CardWithJoke("sdksnfkjsdn ssdngksngkjsn sdgnsldgnlsg", null)
 }
