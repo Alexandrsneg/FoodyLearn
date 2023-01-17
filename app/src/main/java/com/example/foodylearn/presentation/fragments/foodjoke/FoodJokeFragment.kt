@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.foodylearn.R
 import com.example.foodylearn.databinding.FragmentFoodJokeBinding
-import com.example.foodylearn.data.models.FoodJoke
-import com.example.foodylearn.util.NetworkResult
+import com.example.domain.models.FoodJoke
+import com.example.domain.models.NetworkResult
 import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import java.util.*
 
@@ -58,14 +58,14 @@ class FoodJokeFragment : Fragment() {
                     mainViewModel.insertJoke(
                         com.example.foodylearn.data.database.joke.JokeEntity(
                             1,
-                            FoodJoke(it.data?.text)
+                            com.example.domain.models.FoodJoke(it.data?.text)
                         )
                     )
                 }
-                is NetworkResult.Error -> {
+                is com.example.domain.models.NetworkResult.Error -> {
                     getJokeFromCache()
                 }
-                is NetworkResult.Loading -> {
+                is com.example.domain.models.NetworkResult.Loading -> {
 //                    binding.pbCircleProgress.visibility = View.VISIBLE
                 }
             }

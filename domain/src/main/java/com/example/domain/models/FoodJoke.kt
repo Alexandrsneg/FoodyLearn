@@ -1,4 +1,4 @@
-package com.example.foodylearn.data.models
+package com.example.domain.models
 
 data class FoodJoke(
     val text: String?

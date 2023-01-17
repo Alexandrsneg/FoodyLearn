@@ -1,6 +1,6 @@
 package com.example.foodylearn.data.network
 
-import com.example.foodylearn.data.models.FoodJoke
+import com.example.domain.models.FoodJoke
 import com.example.foodylearn.data.models.FoodRecipes
 import retrofit2.Response
 import retrofit2.http.GET
@@ -23,6 +23,6 @@ interface FoodRecipesApi {
     @GET("food/jokes/random")
     suspend fun getJoke(
         @Query("apiKey") apiKey: String
-    ) : Response<FoodJoke>
+    ) : Response<com.example.domain.models.FoodJoke>
 
 }

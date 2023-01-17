@@ -9,14 +9,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import com.example.foodylearn.R
 import com.example.foodylearn.presentation.adapters.RecipesAdapter
 import com.example.foodylearn.databinding.FragmentRecipesBinding
 import com.example.foodylearn.util.NetworkListener
-import com.example.foodylearn.util.NetworkResult
+import com.example.domain.models.NetworkResult
 import com.example.foodylearn.util.observeOnce
 import com.example.foodylearn.presentation.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -130,19 +129,19 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun requestApiData(isSearch:Boolean = false) {
         mainViewModel.getRecipes(recipesViewModel.applyQueries(searchQuery), isSearch)
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner) {
-            when (it) {
-                is NetworkResult.Success -> {
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is com.example.domain.models.NetworkResult.Success -> {
                     showShimmerEffect(false)
-                    it.data?.let { mAdapter.setData(it) }
+                    result.data?.let { mAdapter.setData(it) }
                 }
-                is NetworkResult.Error -> {
+                is com.example.domain.models.NetworkResult.Error -> {
                     showShimmerEffect(false)
                     loadDataFromCache()
-                    Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), result.message.toString(), Toast.LENGTH_SHORT)
                         .show()
                 }
-                is NetworkResult.Loading -> {
+                is com.example.domain.models.NetworkResult.Loading -> {
                     showShimmerEffect(true)
                 }
             }

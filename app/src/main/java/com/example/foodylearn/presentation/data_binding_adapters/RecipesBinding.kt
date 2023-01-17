@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.foodylearn.data.models.FoodRecipes
-import com.example.foodylearn.util.NetworkResult
+import com.example.domain.models.NetworkResult
 
 class RecipesBinding {
 
@@ -14,14 +14,14 @@ class RecipesBinding {
         @JvmStatic
         fun errorImageViewVisibility(
             imageView: ImageView,
-            apiResponse: NetworkResult<FoodRecipes>?,
+            apiResponse: com.example.domain.models.NetworkResult<FoodRecipes>?,
             dataBase: List<com.example.foodylearn.data.database.recipes.RecipesEntity>?
         ) {
-            if (apiResponse is NetworkResult.Error && dataBase.isNullOrEmpty())
+            if (apiResponse is com.example.domain.models.NetworkResult.Error && dataBase.isNullOrEmpty())
                 imageView.visibility = View.VISIBLE
-            else if (apiResponse is NetworkResult.Loading)
+            else if (apiResponse is com.example.domain.models.NetworkResult.Loading)
                 imageView.visibility = View.INVISIBLE
-            else if (apiResponse is NetworkResult.Success)
+            else if (apiResponse is com.example.domain.models.NetworkResult.Success)
                 imageView.visibility = View.INVISIBLE
 
         }
@@ -30,16 +30,16 @@ class RecipesBinding {
         @JvmStatic
         fun errorTextVisibility(
             textView: TextView,
-            apiResponse: NetworkResult<FoodRecipes>?,
+            apiResponse: com.example.domain.models.NetworkResult<FoodRecipes>?,
             dataBase: List<com.example.foodylearn.data.database.recipes.RecipesEntity>?
         ) {
-            if (apiResponse is NetworkResult.Error && dataBase.isNullOrEmpty()){
+            if (apiResponse is com.example.domain.models.NetworkResult.Error && dataBase.isNullOrEmpty()){
                 textView.visibility = View.VISIBLE
                 textView.text = apiResponse.message.toString()
             }
-            else if (apiResponse is NetworkResult.Loading)
+            else if (apiResponse is com.example.domain.models.NetworkResult.Loading)
                 textView.visibility = View.INVISIBLE
-            else if (apiResponse is NetworkResult.Success)
+            else if (apiResponse is com.example.domain.models.NetworkResult.Success)
                 textView.visibility = View.INVISIBLE
 
         }

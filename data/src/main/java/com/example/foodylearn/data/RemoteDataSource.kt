@@ -1,6 +1,6 @@
 package com.example.foodylearn.data
 
-import com.example.foodylearn.data.models.FoodJoke
+import com.example.domain.models.FoodJoke
 import com.example.foodylearn.data.models.FoodRecipes
 import com.example.foodylearn.data.network.FoodRecipesApi
 import kotlinx.coroutines.Dispatchers

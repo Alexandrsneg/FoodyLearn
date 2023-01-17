@@ -1,4 +1,4 @@
-package com.example.foodylearn.util
+package com.example.domain.models
 
 sealed class NetworkResult<T>(
     val data: T? = null,
@@ -6,7 +6,7 @@ sealed class NetworkResult<T>(
 ) {
 
     class Success<T>(data: T): NetworkResult<T>(data)
-    class Error<T>(message: String?, data: T? = null): NetworkResult<T>(data, message)
+    class Error<T>(message: String?): NetworkResult<T>(null, message)
     class Loading<T>: NetworkResult<T>()
 
 }
