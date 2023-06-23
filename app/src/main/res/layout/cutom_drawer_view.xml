@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mlRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGray"
+    app:layoutDescription="@xml/cutom_drawer_view_scene">
+
+
+    <FrameLayout
+        android:id="@+id/flMainFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/flBackground"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:alpha="0.6"
+        android:background="@color/black"
+        android:clickable="false"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="-8dp"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toEndOf="parent">
+
+        <FrameLayout
+            android:id="@+id/llContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/vDarkEdge"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:background="@color/black"
+        app:layout_constraintStart_toStartOf="@id/frameLayout"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <FrameLayout
+        android:id="@+id/button"
+        android:layout_width="30dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="-8dp"
+        android:background="@drawable/drawer_label_shape"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout">
+
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_alarm" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/spaceForDrag"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="-30dp"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

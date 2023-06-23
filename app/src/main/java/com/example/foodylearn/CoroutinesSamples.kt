@@ -9,18 +9,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 
-fun main(): Unit = runBlocking {
-//    var res1 = async {
-//        longOperationA()
-//    }
-//    var res2 = async {
-//        longOperationB()
-//    }
-//
-//    println(res1.await() + res2.await())
-    var test = Test()
-    test.printPublic()
-    test.invokePrivatePrintData()
+fun main() {
+
+    val test = null
+    val param = "before"
+
+    test?.let {
+        if (param == "before")
+            println("before")
+    } ?: run {
+        println("run")
+        return
+    }
+
+    println("finish")
 }
 
 suspend fun longOperationA(): Int {

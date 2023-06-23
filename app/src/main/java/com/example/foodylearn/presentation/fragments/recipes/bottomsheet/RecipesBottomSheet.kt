@@ -5,9 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.foodylearn.databinding.RecipesBottomSheetBinding
 import com.example.foodylearn.util.Constants
@@ -15,7 +16,6 @@ import com.example.foodylearn.presentation.viewmodels.RecipesViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -44,22 +44,16 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         _binding = RecipesBottomSheetBinding.inflate(inflater, container, false)
 
-        recipesViewModel.readMealAndDietType.asLiveData().observe(viewLifecycleOwner) {
-            mealTypeChip = it.selectedMealType
-            dietTypeChip = it.selectedDietType
-            updateChip(it.selectedMealTypeId, binding.cgMealsChipsContainer)
-            updateChip(it.selectedDietTypeId, binding.cgDietChipsContainer)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                recipesViewModel.readMealAndDietType.collect {
+                    mealTypeChip = it.selectedMealType
+                    dietTypeChip = it.selectedDietType
+                    updateChip(it.selectedMealTypeId, binding.cgMealsChipsContainer)
+                    updateChip(it.selectedDietTypeId, binding.cgDietChipsContainer)
+                }
+            }
         }
-
-        //можно с помощью котлин флоу
-//        lifecycleScope.launch {
-//            recipesViewModel.readMealAndDietType.collect {
-//                mealTypeChip = it.selectedMealType
-//                dietTypeChip = it.selectedDietType
-//                updateChip(it.selectedMealTypeId, binding.cgMealsChipsContainer)
-//                updateChip(it.selectedDietTypeId, binding.cgDietChipsContainer)
-//            }
-//        }
 
         binding.cgMealsChipsContainer.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
