@@ -42,6 +42,7 @@ fun View.fadeVisibilityAnimate(show: Boolean, duration: Long = 300) {
 }
 
 fun View.enabledAlpha() {
+    print("this is master")
     visibility = View.VISIBLE
     alpha = 1f
     isEnabled = true
