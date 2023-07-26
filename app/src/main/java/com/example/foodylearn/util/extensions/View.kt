@@ -65,4 +65,17 @@ fun View.animateAlpha(isIn: Boolean, onAnimationEnd: (() -> Unit)? = null) {
     animate().alpha(endAlpha).setDuration(300).withEndAction {
         onAnimationEnd?.invoke()
     }
+
+    fun View.fadeVisibilityAnimate(show: Boolean, duration: Long = 300) {
+        val transition: android.transition.Transition = android.transition.Fade().apply {
+            this.duration = duration
+            addTarget(this@fadeVisibilityAnimate)
+        }
+        android.transition.TransitionManager.beginDelayedTransition(
+            this.parent as ViewGroup?,
+            transition
+        )
+        visibility = if (show) View.VISIBLE else View.GONE
+    }
+
 }
