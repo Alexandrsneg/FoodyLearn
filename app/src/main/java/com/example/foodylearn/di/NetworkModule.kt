@@ -1,5 +1,6 @@
 package com.example.foodylearn.di
 
+import com.example.foodylearn.data.IOExceptionInterceptor
 import com.example.foodylearn.data.network.FoodRecipesApi
 import com.example.foodylearn.util.Constants.BASE_URL
 import dagger.Module
@@ -53,5 +54,9 @@ object NetworkModule {
     fun provideApiService(retrofit: Retrofit): com.example.foodylearn.data.network.FoodRecipesApi {
         return retrofit.create(com.example.foodylearn.data.network.FoodRecipesApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideIOExceptionInterceptor() = IOExceptionInterceptor()
 
 }

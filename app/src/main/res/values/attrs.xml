@@ -5,4 +5,9 @@
         <attr name="cv_is_active" format="boolean"/>
         <attr name="cv_color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="LongTapButton">
+        <attr name="ltp_title" format="string"/>
+        <attr name="ltp_timer_ms" format="float" />
+    </declare-styleable>
 </resources>

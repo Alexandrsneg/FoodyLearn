@@ -50,32 +50,24 @@ fun View.enabledAlpha() {
 
 fun List<View>.disableAnimated(disable: Boolean, onAnimationEnd: (() -> Unit)? = null) {
     forEach {
-        it.animateAlpha(!disable, onAnimationEnd)
+        it.animateAlpha(!disable, false, onAnimationEnd)
         it.isEnabled = !disable
     }
 }
 
 fun View.disableAnimated(disable: Boolean, onAnimationEnd: (() -> Unit)? = null) {
-    animateAlpha(!disable, onAnimationEnd)
+    animateAlpha(!disable, false, onAnimationEnd)
     isEnabled = !disable
 }
 
-fun View.animateAlpha(isIn: Boolean, onAnimationEnd: (() -> Unit)? = null) {
-    val endAlpha = if (isIn) 1f else 0.5f
+fun View.animateAlpha(
+    isIn: Boolean,
+    fullInvise: Boolean = false,
+    onAnimationEnd: (() -> Unit)? = null,
+) {
+    val lowerAlpha = if (fullInvise) 0.0f else 0.5f
+    val endAlpha = if (isIn) 1f else lowerAlpha
     animate().alpha(endAlpha).setDuration(300).withEndAction {
         onAnimationEnd?.invoke()
     }
-
-    fun View.fadeVisibilityAnimate(show: Boolean, duration: Long = 300) {
-        val transition: android.transition.Transition = android.transition.Fade().apply {
-            this.duration = duration
-            addTarget(this@fadeVisibilityAnimate)
-        }
-        android.transition.TransitionManager.beginDelayedTransition(
-            this.parent as ViewGroup?,
-            transition
-        )
-        visibility = if (show) View.VISIBLE else View.GONE
-    }
-
 }
