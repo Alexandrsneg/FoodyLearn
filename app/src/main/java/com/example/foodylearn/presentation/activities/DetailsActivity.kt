@@ -129,6 +129,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun changeItemColor(item: MenuItem, color: Int) {
-        item.icon.setTint(ContextCompat.getColor(this, color))
+        item.icon?.setTint(ContextCompat.getColor(this, color))
     }
 }

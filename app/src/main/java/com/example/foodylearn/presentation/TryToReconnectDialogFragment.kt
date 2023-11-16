@@ -65,6 +65,7 @@ class TryToReconnectDialogFragment :
                         IOInterceptorStatus.OnSuccessResponse -> {
                             dismiss()
                         }
+                        else -> {}
                     }
                 }
             }

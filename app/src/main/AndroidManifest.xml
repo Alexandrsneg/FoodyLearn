@@ -15,9 +15,6 @@
         android:theme="@style/SplashScreenStyle"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".viewmodels.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.activities.DetailsActivity"
             android:exported="true"
             android:label="Details"

@@ -13,8 +13,8 @@ interface FavoritesDAO {
     fun readFavorites(): Flow<List<FavoritesEntity>>
 
     @Delete
-    suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity)
+    fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity): Int
 
     @Query("DELETE FROM favorites_table")
-    suspend fun deleteAllFavoriteRecipes()
+    fun deleteAllFavoriteRecipes(): Int
 }

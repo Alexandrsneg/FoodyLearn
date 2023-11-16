@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface JokeDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertJoke(jokeEntity: JokeEntity)
+    fun insertJoke(jokeEntity: JokeEntity)
 
     @Query("SELECT * FROM joke_table ORDER BY id ASC")
     fun readJoke(): Flow<JokeEntity?>
