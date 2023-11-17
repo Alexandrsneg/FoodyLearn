@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class Result(
+data class Recipe(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int?,
     @SerializedName("cheap")

@@ -1,6 +1,10 @@
 package com.example.foodylearn.presentation.adapters
 
-import android.view.*
+import android.view.ActionMode
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -10,8 +14,8 @@ import com.example.foodylearn.R
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 import com.example.foodylearn.databinding.FavoritesRowLayotBinding
 import com.example.foodylearn.presentation.fragments.favorites.FavoriteRecipesFragmentDirections
-import com.example.foodylearn.util.RecipesDiffUtil
 import com.example.foodylearn.presentation.viewmodels.MainViewModel
+import com.example.foodylearn.util.RecipesDiffUtil
 
 class FavoriteRecipesAdapter(
     private val requireActivity: FragmentActivity,

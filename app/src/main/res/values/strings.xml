@@ -13,5 +13,7 @@
     <string name="side_dish">Side dish</string>
     <string name="diet_type">Diet Type</string>
     <string name="delete_favorite_menu">Delete Favorite Menu</string>
-    <string name="remove_all">удалить всё</string>
+    <string name="remove_all">Remove all</string>
+    <string name="connection_available">Connection is available</string>
+    <string name="connection_lost">Connection lost</string>
 </resources>

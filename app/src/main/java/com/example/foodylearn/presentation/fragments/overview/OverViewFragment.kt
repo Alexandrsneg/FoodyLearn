@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import coil.load
 import com.example.foodylearn.databinding.FragmentOverViewBinding
-import com.example.foodylearn.data.models.Result
+import com.example.foodylearn.data.models.Recipe
 
 
 class OverViewFragment : Fragment() {
@@ -22,37 +22,37 @@ class OverViewFragment : Fragment() {
     ): View {
         _binding = FragmentOverViewBinding.inflate(inflater, container, false)
 
-        (arguments?.getParcelable("recipeBundle") as? Result)?.let {
+        (arguments?.getParcelable("recipeBundle") as? Recipe)?.let {
             renderFragment(it)
         }
         return binding.root
     }
 
-    private fun renderFragment(result: Result) {
+    private fun renderFragment(recipe: Recipe) {
         with(binding) {
-            ivMainImage.load(result.image)
-            tvTitle.text = result.title
-            tvFavorites.text = result.aggregateLikes.toString()
-            tvMinutes.text = result.readyInMinutes.toString()
-            tvTitle.text = result.title
-            tvSummary.text = Html.fromHtml(result.summary)
+            ivMainImage.load(recipe.image)
+            tvTitle.text = recipe.title
+            tvFavorites.text = recipe.aggregateLikes.toString()
+            tvMinutes.text = recipe.readyInMinutes.toString()
+            tvTitle.text = recipe.title
+            tvSummary.text = Html.fromHtml(recipe.summary)
 
-            if (result.vegetarian)
+            if (recipe.vegetarian)
                 cvVegetarian.active = true
 
-            if (result.vegan)
+            if (recipe.vegan)
                 cvVegan.active = true
 
-            if (result.glutenFree == true)
+            if (recipe.glutenFree == true)
                 cvGlutenFree.active = true
 
-            if (result.dairyFree == true)
+            if (recipe.dairyFree == true)
                 cvDairyFree.active = true
 
-            if (result.veryHealthy)
+            if (recipe.veryHealthy)
                 cvHealthy.active = true
 
-            if (result.cheap == true)
+            if (recipe.cheap == true)
                 cvCheap.active = true
         }
     }

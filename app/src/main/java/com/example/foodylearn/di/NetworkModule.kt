@@ -1,11 +1,14 @@
 package com.example.foodylearn.di
 
+import android.content.Context
 import com.example.foodylearn.data.IOExceptionInterceptor
 import com.example.foodylearn.data.network.FoodRecipesApi
 import com.example.foodylearn.util.Constants.BASE_URL
+import com.example.foodylearn.util.NetworkListener
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -58,5 +61,10 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideIOExceptionInterceptor() = IOExceptionInterceptor()
+
+
+    @Singleton
+    @Provides
+    fun provideNetworkListener(@ApplicationContext context: Context) = NetworkListener(context)
 
 }

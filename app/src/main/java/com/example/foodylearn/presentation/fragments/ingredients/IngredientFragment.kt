@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodylearn.presentation.adapters.IngredientsAdapter
 import com.example.foodylearn.databinding.FragmentIngredientBinding
-import com.example.foodylearn.data.models.Result
+import com.example.foodylearn.data.models.Recipe
 import com.example.foodylearn.util.Constants
 
 class IngredientFragment : Fragment() {
@@ -22,7 +22,7 @@ class IngredientFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentIngredientBinding.inflate(inflater, container, false)
-        val myBundle: Result? = arguments?.getParcelable(Constants.RECIPE_RESULT_KEY)
+        val myBundle: Recipe? = arguments?.getParcelable(Constants.RECIPE_RESULT_KEY)
 
         val _adapter = IngredientsAdapter()
         with(binding.rvIngredients) {

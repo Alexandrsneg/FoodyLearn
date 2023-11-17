@@ -11,7 +11,7 @@ import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import coil.load
 import com.example.foodylearn.R
-import com.example.foodylearn.data.models.Result
+import com.example.foodylearn.data.models.Recipe
 import com.example.foodylearn.presentation.fragments.recipes.RecipesFragmentDirections
 
 class RecipesRowBinding {
@@ -20,10 +20,10 @@ class RecipesRowBinding {
 
         @BindingAdapter("onRecipeClickListener")
         @JvmStatic
-        fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
+        fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, recipe: Recipe) {
             recipeRowLayout.setOnClickListener {
                 try {
-                    val action = RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(result)
+                    val action = RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(recipe)
                     recipeRowLayout.findNavController().navigate(action)
                 } catch (e: Exception){
                     Log.d("RecipesRowBinding", e.toString())

@@ -6,17 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodylearn.databinding.RecipiesRowLayoutBinding
 import com.example.foodylearn.data.models.FoodRecipes
-import com.example.foodylearn.data.models.Result
+import com.example.foodylearn.data.models.Recipe
 import com.example.foodylearn.util.RecipesDiffUtil
 
 class RecipesAdapter: RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 
-    private var recipes = emptyList<Result>()
+    private var recipes = emptyList<Recipe>()
 
     class MyViewHolder(private val binding: RecipiesRowLayoutBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(result: Result){
-            binding.result = result
+        fun bind(recipe: Recipe){
+            binding.result = recipe
             binding.executePendingBindings()
         }
 
@@ -45,9 +45,9 @@ class RecipesAdapter: RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
     }
 
     fun setData(newData: FoodRecipes){
-        val recipesDiffUtil = RecipesDiffUtil(recipes, newData.results)
+        val recipesDiffUtil = RecipesDiffUtil(recipes, newData.recipes)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-        recipes = newData.results
+        recipes = newData.recipes
         diffUtilResult.dispatchUpdatesTo(this)
     }
 }

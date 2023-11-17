@@ -20,7 +20,7 @@ class LocalDataSource @Inject constructor(
         return recipesDAO.readRecipes()
     }
 
-    suspend fun insertRecipes(recipesEntity: RecipesEntity) {
+    fun insertRecipes(recipesEntity: RecipesEntity) {
         recipesDAO.insertRecipes(recipesEntity)
     }
 
