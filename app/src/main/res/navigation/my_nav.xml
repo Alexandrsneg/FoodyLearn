@@ -50,7 +50,7 @@
         android:label="Details"
         tools:layout="@layout/activity_details" >
         <argument
-            android:name="result"
+            android:name="recipe"
             app:argType="com.example.foodylearn.data.models.Recipe" />
     </activity>
 </navigation>

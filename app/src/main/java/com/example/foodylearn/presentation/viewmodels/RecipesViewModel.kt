@@ -20,11 +20,8 @@ class RecipesViewModel @Inject constructor(
 
     private var mealType = Constants.DEFAULT_MEAL_TYPE
     private var dietType = Constants.DEFAULT_DIET_TYPE
-    var isNetworkStatusAvailable = false
-    var backOnline = false
 
     val readMealAndDietType = dataStoreRepository.readMealAndDietType
-    var readBackOnline = dataStoreRepository.readBackOnline
 
     fun saveMealAndDietType(mealType: String, mealTypeId: Int, dietType: String, dietTypeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,14 +29,7 @@ class RecipesViewModel @Inject constructor(
         }
     }
 
-    fun saveBackOnline(isBackOnline: Boolean){
-        viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveBackOnline(isBackOnline)
-        }
-    }
-
     fun applyQueries(search: String? = null): HashMap<String, String> {
-
         viewModelScope.launch {
             readMealAndDietType.collect {
                 mealType = it.selectedMealType
@@ -47,30 +37,15 @@ class RecipesViewModel @Inject constructor(
             }
         }
 
-
         val queries: HashMap<String, String> = HashMap()
-        queries[Constants.QUERY_NUMBER] = Constants.DEFAULT_RECIPES_NUMBER
-        queries[Constants.QUERY_API_KEY] = Constants.API_KEY
-        search?.let { queries[Constants.QUERY_SEARCH] = it }
-        queries[Constants.QUERY_TYPE] = mealType
-        queries[Constants.QUERY_DIET] = dietType
-        queries[Constants.QUERY_ADD_RECIPE_INFO] = "true"
-        queries[Constants.QUERY_FILL_INGRERDIENTS] = "true"
-        return queries
-    }
-
-    fun showNetworkStatus() {
-        if(!isNetworkStatusAvailable){
-            Toast.makeText(getApplication(), "No internet connection", Toast.LENGTH_SHORT).show()
-            saveBackOnline(true)
+        return queries.apply {
+            search?.let { put(Constants.QUERY_SEARCH, it) }
+            put(Constants.QUERY_NUMBER, Constants.DEFAULT_RECIPES_NUMBER)
+            put(Constants.QUERY_API_KEY, Constants.API_KEY)
+            put(Constants.QUERY_TYPE, mealType)
+            put(Constants.QUERY_DIET, dietType)
+            put(Constants.QUERY_ADD_RECIPE_INFO, "true")
+            put(Constants.QUERY_FILL_INGRERDIENTS, "true")
         }
-        else {
-            if (backOnline) {
-                Toast.makeText(getApplication(), "Connection fixed", Toast.LENGTH_SHORT).show()
-                saveBackOnline(false)
-            }
-        }
-
     }
-
 }

@@ -15,6 +15,9 @@ interface FavoritesDAO {
     @Delete
     fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity): Int
 
+    @Query("DELETE FROM favorites_table WHERE id = :userId")
+    fun deleteById(userId: Int)
+
     @Query("DELETE FROM favorites_table")
     fun deleteAllFavoriteRecipes(): Int
 }

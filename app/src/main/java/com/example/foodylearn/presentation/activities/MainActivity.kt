@@ -1,8 +1,6 @@
 package com.example.foodylearn.presentation.activities
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,10 +8,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.foodylearn.R
 import com.example.foodylearn.databinding.ActivityMainBinding
-import com.example.foodylearn.util.NetworkListener
-import com.example.foodylearn.util.repeatOnLifecycleExt
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ABaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {

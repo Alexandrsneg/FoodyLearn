@@ -9,5 +9,5 @@ import com.example.foodylearn.data.models.Recipe
 class FavoritesEntity(
     @PrimaryKey(autoGenerate = false)
     var id: Int,
-    var recipes: Recipe
+    var recipe: Recipe
 )

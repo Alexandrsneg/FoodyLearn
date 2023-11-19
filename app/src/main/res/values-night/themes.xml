@@ -16,5 +16,9 @@
         <item name="itemTextColor">@color/bottom_nav_item_color</item>
     </style>
 
+    <style name="AppBackground">
+        <item name="background">@drawable/app_background</item>
+    </style>
+
 
 </resources>

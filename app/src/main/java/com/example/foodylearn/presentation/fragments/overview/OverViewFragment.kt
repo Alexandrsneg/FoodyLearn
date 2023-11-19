@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import coil.load
 import com.example.foodylearn.databinding.FragmentOverViewBinding
 import com.example.foodylearn.data.models.Recipe
+import com.example.foodylearn.util.Constants.RECIPE_RESULT_KEY
 
 
 class OverViewFragment : Fragment() {
@@ -22,7 +23,7 @@ class OverViewFragment : Fragment() {
     ): View {
         _binding = FragmentOverViewBinding.inflate(inflater, container, false)
 
-        (arguments?.getParcelable("recipeBundle") as? Recipe)?.let {
+        (arguments?.getParcelable(RECIPE_RESULT_KEY) as? Recipe)?.let {
             renderFragment(it)
         }
         return binding.root

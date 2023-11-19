@@ -2,6 +2,7 @@ package com.example.foodylearn.presentation.activities
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -9,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.example.foodylearn.R
 import com.example.foodylearn.util.NetworkListener
 import com.example.foodylearn.util.repeatOnLifecycleExt
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 abstract class ABaseActivity<VB : ViewBinding>(
@@ -19,6 +21,7 @@ abstract class ABaseActivity<VB : ViewBinding>(
     lateinit var networkListener: NetworkListener
 
     private lateinit var _binding: ViewBinding
+
     @Suppress("UNCHECKED_CAST")
     protected val binding: VB
         get() = _binding as VB
@@ -38,6 +41,14 @@ abstract class ABaseActivity<VB : ViewBinding>(
                 saveLastConnectionStatus(isAvailable)
             }
         }
+    }
+
+    protected fun showSnackBar(
+        message: String,
+        actionText: String = "OK",
+        anchorView: View = binding.root
+    ) {
+        Snackbar.make(anchorView, message, Snackbar.LENGTH_SHORT).setAction(actionText) {}.show()
     }
 
     companion object {

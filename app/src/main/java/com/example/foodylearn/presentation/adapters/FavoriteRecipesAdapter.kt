@@ -66,7 +66,7 @@ class FavoriteRecipesAdapter(
             } else {
                 val action =
                     FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
-                        currentRecipe.recipes
+                        currentRecipe.recipe
                     )
                 holder.itemView.findNavController().navigate(action)
             }
@@ -140,7 +140,7 @@ class FavoriteRecipesAdapter(
     override fun onActionItemClicked(mode: ActionMode?, menu: MenuItem?): Boolean {
         selectedRecipes.forEach {
             selectedRecipes.remove(it)
-            mainViewModel.deleteFavorite(it)
+            mainViewModel.deleteFavoriteById(it.recipe.id!!)
         }
         setData(selectedRecipes)
         mActionMode?.finish()

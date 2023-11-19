@@ -50,21 +50,10 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
 
-//        setHasOptionsMenu(true)
-
         setUpRecyclerView()
 
-        repeatOnLifecycleExt(Lifecycle.State.STARTED) {
-            recipesViewModel.readBackOnline.collect() {
-                recipesViewModel.backOnline = it
-            }
-        }
-
         binding.recipesFab.setOnClickListener {
-            if (recipesViewModel.isNetworkStatusAvailable)
-                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
-            else
-                recipesViewModel.showNetworkStatus()
+            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
         }
 
         readDatabase()
