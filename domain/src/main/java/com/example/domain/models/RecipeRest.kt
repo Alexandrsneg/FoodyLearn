@@ -1,17 +1,10 @@
-package com.example.foodylearn.data.models
+package com.example.domain.models
 
-
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
-
-
-@Parcelize
-data class Recipe(
+data class RecipeRest(
     val aggregateLikes: Int?,
     val cheap: Boolean?,
     val dairyFree: Boolean?,
-    val extendedIngredients: List<ExtendedIngredient>?,
+    val extendedIngredients: List<ExtendedIngredientRest>?,
     val glutenFree: Boolean?,
     val id: Int?,
     val image: String?,
@@ -25,4 +18,4 @@ data class Recipe(
     val vegetarian: Boolean,
     val veryHealthy: Boolean,
     val weightWatcherSmartPoints: Int?
-): Parcelable{}
+)

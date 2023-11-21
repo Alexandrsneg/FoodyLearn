@@ -65,9 +65,6 @@ class FoodJokeFragment : Fragment() {
                 is com.example.domain.models.NetworkResult.Error -> {
                     getJokeFromCache()
                 }
-                is com.example.domain.models.NetworkResult.Loading -> {
-//                    binding.pbCircleProgress.visibility = View.VISIBLE
-                }
             }
         }
 

@@ -1,6 +1,7 @@
 package com.example.foodylearn.data
 
 import com.example.domain.models.FoodJoke
+import com.example.domain.models.FoodRecipesRest
 import com.example.foodylearn.data.models.FoodRecipes
 import com.example.foodylearn.data.network.FoodRecipesApi
 import kotlinx.coroutines.Dispatchers
@@ -12,15 +13,15 @@ class RemoteDataSource @Inject constructor(
     private val foodRecipesApi: FoodRecipesApi
 ) {
 
-     suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipes> =
+     suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipesRest> =
          withContext(Dispatchers.IO) {
             foodRecipesApi.getRecipes(queries)
          }
 
-    suspend fun searchRecipes(queries: Map<String, String>): Response<FoodRecipes> =
-         withContext(Dispatchers.IO) {
-            foodRecipesApi.searchRecipes(queries)
-        }
+//    suspend fun searchRecipes(queries: Map<String, String>): Response<FoodRecipes> =
+//         withContext(Dispatchers.IO) {
+//            foodRecipesApi.searchRecipes(queries)
+//        }
 
     suspend fun getJoke(apiKey: String): Response<FoodJoke> =
         withContext(Dispatchers.IO) {

@@ -16,11 +16,11 @@ class LocalDataSource @Inject constructor(
 ) {
 
 
-    fun readRecipes(): Flow<List<RecipesEntity>> {
+    suspend fun readRecipes(): List<RecipesEntity> {
         return recipesDAO.readRecipes()
     }
 
-    fun insertRecipes(recipesEntity: RecipesEntity) {
+    suspend fun insertRecipes(recipesEntity: RecipesEntity) {
         recipesDAO.insertRecipes(recipesEntity)
     }
 

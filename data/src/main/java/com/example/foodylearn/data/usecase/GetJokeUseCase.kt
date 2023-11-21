@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetJokeUseCase @Inject constructor(
     private val repository: Repository
 ) : IGetJokeUseCase {
-    override suspend fun execute(hasInternetConnection: Boolean?, apiKey: String): NetworkResult<FoodJoke?> {
+    override suspend fun execute(apiKey: String): NetworkResult<FoodJoke?> {
         return try {
             val response = repository.remote.getJoke(apiKey)
             when {
