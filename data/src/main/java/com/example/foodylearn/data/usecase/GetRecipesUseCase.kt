@@ -6,17 +6,19 @@ import com.example.domain.usecase.IGetRecipesUseCase
 import com.example.foodylearn.data.Repository
 import com.example.foodylearn.data.extensions_data.isNotNullAndNotEmpty
 import com.example.foodylearn.data.toFoodRecipesRest
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
 
 class GetRecipesUseCase @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,
+    private val dispatcher: CoroutineDispatcher
 ) : IGetRecipesUseCase {
     override suspend fun getRecipes(queries: Map<String, String>): NetworkResult<FoodRecipesRest> {
         return try {
-            withContext(Dispatchers.IO) {
+            withContext(dispatcher) {
                 val cachedRecipes = repository.local.readRecipes().toFoodRecipesRest()
                 val response = repository.remote.getRecipes(queries)
                 when {
