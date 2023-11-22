@@ -11,6 +11,8 @@ import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import com.example.foodylearn.R
 import com.example.foodylearn.presentation.adapters.RecipesAdapter
 import com.example.foodylearn.databinding.FragmentRecipesBinding
+import com.example.foodylearn.presentation.activities.ABaseActivity
+import com.example.foodylearn.presentation.activities.MainActivity
 import com.example.foodylearn.presentation.fragments.ABaseFragment
 import com.example.foodylearn.presentation.mvi.MainScreenUserIntent
 import com.example.foodylearn.presentation.viewmodels.RecipesViewModel
@@ -29,9 +31,7 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
 
     private val mainViewModel by viewModels<MainViewModel>()
     private val recipesViewModel by viewModels<RecipesViewModel>()
-    private val mAdapter by lazy { RecipesAdapter() }
-
-    private var searchQuery: String? = null
+    private val recipesAdapter by lazy { RecipesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +43,8 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
 
         if (savedInstanceState == null)
             mainViewModel.onMainScreenIntent(
-            MainScreenUserIntent.OnGetRecipes(recipesViewModel.applyQueries())
-        )
+                MainScreenUserIntent.OnGetRecipes(recipesViewModel.applyQueries())
+            )
     }
 
     private fun initScreenStateObserver() {
@@ -52,7 +52,7 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
             mainViewModel.recipesFragmentState.collect {
                 showShimmerEffect(it.isLoading)
                 renderError(it.error)
-                mAdapter.setData(it.recipes)
+                recipesAdapter.setData(it.recipes)
             }
         }
     }
@@ -74,7 +74,6 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
     }
 
     override fun onQueryTextSubmit(p0: String?): Boolean {
-        searchQuery = p0
         // TODO: requestNewData
         return true
     }
@@ -86,7 +85,7 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
 
     private fun setUpRecyclerView() {
         with(binding.shimmerRecyclerView) {
-            adapter = mAdapter
+            adapter = recipesAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }

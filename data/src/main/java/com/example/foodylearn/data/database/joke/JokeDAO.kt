@@ -13,6 +13,6 @@ interface JokeDAO {
     fun insertJoke(jokeEntity: JokeEntity)
 
     @Query("SELECT * FROM joke_table ORDER BY id ASC")
-    fun readJoke(): Flow<JokeEntity?>
+    suspend fun readJoke(): JokeEntity?
 
 }

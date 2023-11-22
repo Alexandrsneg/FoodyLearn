@@ -43,7 +43,7 @@ abstract class ABaseActivity<VB : ViewBinding>(
         }
     }
 
-    protected fun showSnackBar(
+    fun showSnackBar(
         message: String,
         actionText: String = "OK",
         anchorView: View = binding.root

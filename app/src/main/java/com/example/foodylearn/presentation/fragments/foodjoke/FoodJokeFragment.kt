@@ -8,12 +8,15 @@ import android.view.*
 import androidx.compose.ui.text.font.Font
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.example.foodylearn.R
 import com.example.foodylearn.databinding.FragmentFoodJokeBinding
 import com.example.domain.models.FoodJoke
 import com.example.domain.models.NetworkResult
+import com.example.foodylearn.presentation.mvi.MainScreenUserIntent
 import com.example.foodylearn.presentation.viewmodels.MainViewModel
+import com.example.foodylearn.util.repeatOnLifecycleExt
 import java.util.*
 
 
@@ -38,35 +41,18 @@ class FoodJokeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
 
-//        binding.greeting.setContent {
-//            CardWithJoke(joke = "")
-//        }
+        if (savedInstanceState == null)
+            mainViewModel.onMainScreenIntent(MainScreenUserIntent.OnGetJoke)
 
-        mainViewModel.getJoke()
-        mainViewModel.jokeResponse.observe(viewLifecycleOwner) {
-            when (it) {
-                is NetworkResult.Success -> {
-//                    binding.tvJoke.apply {
-//                        text = it.data?.text
-//                        visibility = View.VISIBLE
-//                    }
-                    binding.greeting.apply {
-                        joke = it.data?.text ?: "fail"
-                        visibility = View.VISIBLE
-                    }
-//                    binding.pbCircleProgress.visibility = View.GONE
-                    mainViewModel.insertJoke(
-                        com.example.foodylearn.data.database.joke.JokeEntity(
-                            1,
-                            com.example.domain.models.FoodJoke(it.data?.text)
-                        )
-                    )
-                }
-                is com.example.domain.models.NetworkResult.Error -> {
-                    getJokeFromCache()
+        repeatOnLifecycleExt(Lifecycle.State.STARTED) {
+            mainViewModel.jokeFragmentState.collect {
+                binding.greeting.apply {
+                    joke = it.joke
+                    visibility = View.VISIBLE
                 }
             }
         }
+
 
         if (!NotificationManagerCompat.from(requireContext()).areNotificationsEnabled())
             binding.btnNotifications.visibility = View.VISIBLE
@@ -89,21 +75,6 @@ class FoodJokeFragment : Fragment() {
         return binding.root
     }
 
-    private fun getJokeFromCache() {
-        mainViewModel.readJoke.observe(viewLifecycleOwner) {
-            it?.let { cachedJoke ->
-                binding.ivJokeNotFound.visibility = View.GONE
-//                binding.tvJoke.apply {
-//                    text = joke.joke.text
-//                    visibility = View.VISIBLE
-//                }
-                binding.greeting.apply {
-                    joke = cachedJoke.joke.text ?: "cache fail"
-                    visibility = View.VISIBLE
-                }
-            }
-        }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.joke_share_menu, menu)
@@ -133,18 +104,4 @@ class FoodJokeFragment : Fragment() {
         else
             binding.btnNotifications.visibility = View.GONE
     }
-
-//    @Composable
-//    private fun Greeting() {
-//        Text(
-//            text = "Joke",
-//            style = MaterialTheme.typography.h5,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 8.dp)
-//                .wrapContentWidth(Alignment.CenterHorizontally)
-//        )
-//    }
-
-
 }
