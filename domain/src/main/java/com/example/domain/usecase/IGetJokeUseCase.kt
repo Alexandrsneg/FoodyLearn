@@ -1,8 +1,7 @@
 package com.example.domain.usecase
 
-import com.example.domain.models.FoodJoke
-import com.example.domain.models.NetworkResult
+import com.example.domain.models.Result
 
 interface IGetJokeUseCase {
-    suspend fun execute(apiKey: String): NetworkResult<String>
+    suspend fun execute(apiKey: String): Result<String>
 }

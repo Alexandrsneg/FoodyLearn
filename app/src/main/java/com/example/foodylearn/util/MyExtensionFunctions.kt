@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -35,5 +36,12 @@ fun LifecycleOwner.repeatOnLifecycleExt(state: Lifecycle.State, block: suspend C
         lifecycle.repeatOnLifecycle(state) {
             block.invoke(this)
         }
+    }
+}
+
+fun exceptionHandler(message: String? = null, onExceptionBlock: (String)->Unit): CoroutineExceptionHandler {
+    return CoroutineExceptionHandler { coroutineContext, throwable ->
+        val errorMessage = throwable.message ?: message ?: return@CoroutineExceptionHandler
+        onExceptionBlock.invoke(errorMessage)
     }
 }

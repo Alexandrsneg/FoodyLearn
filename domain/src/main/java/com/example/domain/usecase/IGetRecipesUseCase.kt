@@ -1,10 +1,10 @@
 package com.example.domain.usecase
 
 import com.example.domain.models.FoodRecipesRest
-import com.example.domain.models.NetworkResult
+import com.example.domain.models.Result
 
 interface IGetRecipesUseCase {
     suspend fun getRecipes(
         queries: Map<String, String>
-    ): NetworkResult<FoodRecipesRest>
+    ): Result<FoodRecipesRest>
 }

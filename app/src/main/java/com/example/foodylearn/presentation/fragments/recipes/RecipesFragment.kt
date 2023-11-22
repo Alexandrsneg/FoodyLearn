@@ -3,6 +3,7 @@ package com.example.foodylearn.presentation.fragments.recipes
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -25,12 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBinding::inflate),
     SearchView.OnQueryTextListener {
 
-    //    private val args by navArgs<RecipesFragmentArgs>() нельзя чистить или менять
-    private fun backFromBottomSheet() = arguments?.getBoolean("backFromBottomSheet") ?: false
-
-
-    private val mainViewModel by viewModels<MainViewModel>()
-    private val recipesViewModel by viewModels<RecipesViewModel>()
+    private val mainViewModel by activityViewModels<MainViewModel>()
+    private val recipesViewModel by activityViewModels<RecipesViewModel>()
     private val recipesAdapter by lazy { RecipesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
