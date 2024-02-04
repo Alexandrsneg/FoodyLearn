@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodylearn.databinding.RecipiesRowLayoutBinding
 import com.example.foodylearn.data.models.FoodRecipes
+import com.example.foodylearn.databinding.RecipiesRowLayoutBinding
 import com.example.foodylearn.data.models.Recipe
 import com.example.foodylearn.util.RecipesDiffUtil
 

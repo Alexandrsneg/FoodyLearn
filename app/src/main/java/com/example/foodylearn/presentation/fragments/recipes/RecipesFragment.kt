@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.models.FoodRecipesClean
 import com.example.foodylearn.presentation.viewmodels.MainViewModel
 import com.example.foodylearn.R
+import com.example.foodylearn.data.toFoodRecipes
 import com.example.foodylearn.presentation.adapters.RecipesAdapter
 import com.example.foodylearn.databinding.FragmentRecipesBinding
-import com.example.foodylearn.presentation.activities.ABaseActivity
-import com.example.foodylearn.presentation.activities.MainActivity
 import com.example.foodylearn.presentation.fragments.ABaseFragment
-import com.example.foodylearn.presentation.mvi.MainScreenUserIntent
+import com.example.foodylearn.presentation.mvi.UserIntent
 import com.example.foodylearn.presentation.viewmodels.RecipesViewModel
 import com.example.foodylearn.util.UiText
 import com.example.foodylearn.util.extensions.fadeVisibilityAnimate
@@ -40,7 +39,7 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
 
         if (savedInstanceState == null)
             mainViewModel.onMainScreenIntent(
-                MainScreenUserIntent.OnGetRecipes(recipesViewModel.applyQueries())
+                UserIntent.OnGetRecipes(recipesViewModel.applyQueries())
             )
     }
 
@@ -49,9 +48,13 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
             mainViewModel.recipesFragmentState.collect {
                 showShimmerEffect(it.isLoading)
                 renderError(it.error)
-                recipesAdapter.setData(it.recipes)
+                renderRecipesList(it.recipes)
             }
         }
+    }
+
+    private fun renderRecipesList(recipes: FoodRecipesClean) {
+        recipesAdapter.setData(recipes.toFoodRecipes())
     }
 
     private fun renderError(error: UiText?) {

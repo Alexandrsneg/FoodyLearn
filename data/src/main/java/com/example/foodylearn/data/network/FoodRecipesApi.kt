@@ -1,8 +1,9 @@
 package com.example.foodylearn.data.network
 
-import com.example.domain.models.FoodJoke
-import com.example.domain.models.FoodRecipesRest
+import com.example.domain.models.FoodJokeClean
+import com.example.domain.models.FoodRecipesClean
 import com.example.foodylearn.data.models.FoodRecipes
+import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,7 +14,7 @@ interface FoodRecipesApi {
     @GET("/recipes/complexSearch")
     suspend fun getRecipes(
         @QueryMap queries: Map<String, String>
-    ) : Response<FoodRecipesRest>
+    ) : FoodRecipes
 
 //
 //    @GET("/recipes/complexSearch")
@@ -22,8 +23,9 @@ interface FoodRecipesApi {
 //    ) : Response<FoodRecipes>
 
     @GET("food/jokes/random")
-    suspend fun getJoke(
-        @Query("apiKey") apiKey: String
-    ) : Response<FoodJoke>
+    suspend fun getJoke() : FoodJokeClean
+
+    @GET("food/jokes/random")
+    fun getJokeRx() : Single<FoodJokeClean>
 
 }

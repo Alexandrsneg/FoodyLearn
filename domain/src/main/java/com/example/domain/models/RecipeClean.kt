@@ -1,10 +1,10 @@
 package com.example.domain.models
 
-data class RecipeRest(
+data class RecipeClean(
     val aggregateLikes: Int?,
     val cheap: Boolean?,
     val dairyFree: Boolean?,
-    val extendedIngredients: List<ExtendedIngredientRest>?,
+    val extendedIngredientCleans: List<ExtendedIngredientClean>?,
     val glutenFree: Boolean?,
     val id: Int?,
     val image: String?,

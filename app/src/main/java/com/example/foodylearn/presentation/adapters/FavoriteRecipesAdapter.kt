@@ -140,7 +140,8 @@ class FavoriteRecipesAdapter(
     override fun onActionItemClicked(mode: ActionMode?, menu: MenuItem?): Boolean {
         selectedRecipes.forEach {
             selectedRecipes.remove(it)
-            mainViewModel.deleteFavoriteById(it.recipe.id!!)
+            //todo remove viewModel link, change to intarface
+//            mainViewModel.deleteFavoriteById(it.recipe.id!!)
         }
         setData(selectedRecipes)
         mActionMode?.finish()

@@ -38,11 +38,11 @@ fun CardWithJoke(joke: String, context: Context?) {
                 .verticalScroll(
                     state = rememberScrollState()
                 ),
-            fontFamily = context?.let {
-                ResourcesCompat.getFont(it, R.font.courgette)?.let { typeFace ->
-                    FontFamily(typeFace)
-                }
-            },
+//            fontFamily = context?.let {
+//                ResourcesCompat.getFont(it, R.font.courgette)?.let { typeFace ->
+//                    FontFamily(typeFace)
+//                }
+//            },
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color(R.color.titleColor)

@@ -71,3 +71,12 @@ fun View.animateAlpha(
         onAnimationEnd?.invoke()
     }
 }
+
+
+fun View.visibility(visible: Boolean) {
+    visibility = if (visible)
+        View.VISIBLE
+    else
+        View.GONE
+
+}

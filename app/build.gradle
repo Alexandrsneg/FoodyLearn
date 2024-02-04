@@ -137,4 +137,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha02'
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.0'
+
+
+    //RX
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
+
 }

@@ -1,22 +1,27 @@
 package com.example.foodylearn.data
 
-import com.example.domain.models.ExtendedIngredientRest
-import com.example.domain.models.FoodRecipesRest
-import com.example.domain.models.RecipeRest
+import com.example.domain.models.ExtendedIngredientClean
+import com.example.domain.models.FoodRecipesClean
+import com.example.domain.models.RecipeClean
+import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
 import com.example.foodylearn.data.database.recipes.RecipesEntity
 import com.example.foodylearn.data.models.ExtendedIngredient
 import com.example.foodylearn.data.models.FoodRecipes
 import com.example.foodylearn.data.models.Recipe
 
 
-//******************** UI to REST ******************************
-fun FoodRecipesRest.toFoodRecipes() = FoodRecipes(recipes = results.map { it.toRecipe() })
-fun RecipeRest.toRecipe() =
+//******************** CLEAN to ANDROID ******************************
+fun FoodRecipesClean.toFoodRecipes() =
+    if (recipes.isNotEmpty())
+        FoodRecipes(recipes = recipes.map { it.toRecipe() })
+    else
+        FoodRecipes(emptyList())
+fun RecipeClean.toRecipe() =
     Recipe(
         aggregateLikes = aggregateLikes,
         cheap = cheap,
         dairyFree = dairyFree,
-        extendedIngredients = extendedIngredients?.map { it.toExtendedIngredient() },
+        extendedIngredients = extendedIngredientCleans?.map { it.toExtendedIngredient() },
         glutenFree = glutenFree,
         id = id,
         image = image,
@@ -32,7 +37,7 @@ fun RecipeRest.toRecipe() =
         weightWatcherSmartPoints = weightWatcherSmartPoints
     )
 
-fun ExtendedIngredientRest.toExtendedIngredient() =
+fun ExtendedIngredientClean.toExtendedIngredient() =
     ExtendedIngredient(
         amount = amount,
         consistency = consistency,
@@ -43,15 +48,15 @@ fun ExtendedIngredientRest.toExtendedIngredient() =
     )
 
 
-//******************** REST to UI ******************************
+//******************** ANDROID to CLEAN ******************************
 
-fun FoodRecipes.toFoodRecipesRest() = FoodRecipesRest(results = recipes.map { it.toRecipeRest() })
-fun Recipe.toRecipeRest() =
-    RecipeRest(
+fun FoodRecipes.toFoodRecipesClean() = FoodRecipesClean(recipes = recipes.map { it.toRecipeClean() })
+fun Recipe.toRecipeClean() =
+    RecipeClean(
         aggregateLikes = aggregateLikes,
         cheap = cheap,
         dairyFree = dairyFree,
-        extendedIngredients = extendedIngredients?.map { it.toExtendedIngredientRest() },
+        extendedIngredientCleans = extendedIngredients?.map { it.toExtendedIngredientClean() },
         glutenFree = glutenFree,
         id = id,
         image = image,
@@ -67,8 +72,8 @@ fun Recipe.toRecipeRest() =
         weightWatcherSmartPoints = weightWatcherSmartPoints
     )
 
-fun ExtendedIngredient.toExtendedIngredientRest() =
-    ExtendedIngredientRest(
+fun ExtendedIngredient.toExtendedIngredientClean() =
+    ExtendedIngredientClean(
         amount = amount,
         consistency = consistency,
         image = image,
@@ -77,7 +82,10 @@ fun ExtendedIngredient.toExtendedIngredientRest() =
         unit = unit,
     )
 
-fun List<RecipesEntity>.toFoodRecipesRest(): FoodRecipesRest? =
-    this.getOrNull(0)?.let {
-        FoodRecipes(it.foodRecipes.recipes).toFoodRecipesRest()
-    }
+fun RecipesEntity.toFoodRecipesClean(): FoodRecipesClean = foodRecipes
+
+fun List<FavoritesEntity>.toFoodRecipesClean() =
+    FoodRecipesClean(map {
+        it.recipe.toRecipeClean()
+    })
+

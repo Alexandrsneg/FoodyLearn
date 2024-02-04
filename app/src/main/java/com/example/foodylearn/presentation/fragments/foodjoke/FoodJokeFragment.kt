@@ -1,22 +1,17 @@
 package com.example.foodylearn.presentation.fragments.foodjoke
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.*
-import androidx.compose.ui.text.font.Font
-import androidx.core.app.NotificationManagerCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import com.example.foodylearn.R
 import com.example.foodylearn.databinding.FragmentFoodJokeBinding
-import com.example.foodylearn.databinding.FragmentRecipesBinding
 import com.example.foodylearn.presentation.fragments.ABaseFragment
-import com.example.foodylearn.presentation.mvi.MainScreenUserIntent
+import com.example.foodylearn.presentation.mvi.UserIntent
 import com.example.foodylearn.presentation.viewmodels.MainViewModel
+import com.example.foodylearn.util.extensions.animateAlpha
+import com.example.foodylearn.util.extensions.visibility
 import com.example.foodylearn.util.repeatOnLifecycleExt
 
 
@@ -25,19 +20,32 @@ class FoodJokeFragment : ABaseFragment<FragmentFoodJokeBinding>(FragmentFoodJoke
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initScreenStateObserver()
+        initListeners()
         if (savedInstanceState == null)
-            mainViewModel.onMainScreenIntent(MainScreenUserIntent.OnGetJoke)
+            getJoke()
+    }
+
+    private fun initListeners() {
+        binding.btnRefresh.setOnClickListener {
+            getJoke()
+        }
     }
 
     private fun initScreenStateObserver() {
         repeatOnLifecycleExt(Lifecycle.State.STARTED) {
             mainViewModel.jokeFragmentState.collect {
+                binding.ivJokeNotFound.visibility(it.error != null)
+                binding.progressBar.visibility(it.isLoading)
                 binding.greeting.apply {
                     joke = it.joke
-                    visibility = View.VISIBLE
+                    animateAlpha(!it.isLoading)
                 }
             }
         }
+    }
+
+    private fun getJoke() {
+        mainViewModel.onMainScreenIntent(UserIntent.OnGetJoke)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -45,9 +45,9 @@ class DetailsActivity : ABaseActivity<ActivityDetailsBinding>(ActivityDetailsBin
     }
 
     private fun initObservers() {
-        mainViewModel.readFavoriteRecipes.observe(this) {
-            renderFavoriteIcon(it)
-        }
+//        mainViewModel.readFavoriteRecipes.observe(this) {
+//            renderFavoriteIcon(it)
+//        }
     }
 
     private fun initViewPager() {
@@ -80,7 +80,6 @@ class DetailsActivity : ABaseActivity<ActivityDetailsBinding>(ActivityDetailsBin
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
         favoriteMenuItem = menu.findItem(R.id.menu_favorite)
-        mainViewModel.readFavoriteRecipes.value?.let { renderFavoriteIcon(it) }
         return true
     }
 
@@ -93,11 +92,13 @@ class DetailsActivity : ABaseActivity<ActivityDetailsBinding>(ActivityDetailsBin
     }
 
     private fun saveFavorite() {
-        mainViewModel.insertFavorites(FavoritesEntity(args.recipe.id!!, args.recipe))
+        //todo intent
+//        mainViewModel.insertFavorites(FavoritesEntity(args.recipe.id!!, args.recipe))
     }
 
     private fun removeFavorite() {
-        mainViewModel.deleteFavoriteById(args.recipe.id!!)
+        //todo intent
+//        mainViewModel.deleteFavoriteById(args.recipe.id!!)
     }
 
     private fun renderFavoriteIcon(favoritesEntities: List<FavoritesEntity>) {

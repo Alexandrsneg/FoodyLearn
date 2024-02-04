@@ -1,4 +1,4 @@
-package com.example.foodylearn.data
+package com.example.foodylearn.data.data_sources
 
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesDAO
 import com.example.foodylearn.data.database.favorites.favorites.FavoritesEntity
@@ -6,7 +6,6 @@ import com.example.foodylearn.data.database.joke.JokeDAO
 import com.example.foodylearn.data.database.joke.JokeEntity
 import com.example.foodylearn.data.database.recipes.RecipesDAO
 import com.example.foodylearn.data.database.recipes.RecipesEntity
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
@@ -15,33 +14,32 @@ class LocalDataSource @Inject constructor(
     private val jokeDao: JokeDAO
 ) {
 
+    // ****************** READ ****************
+    suspend fun readRecipes(): RecipesEntity = recipesDAO.readRecipes()
+    suspend fun readFavoriteRecipes(): List<FavoritesEntity> = favoritesDAO.readFavorites()
+    suspend fun readJoke(): JokeEntity? = jokeDao.readJoke()
 
-    suspend fun readRecipes(): List<RecipesEntity> {
-        return recipesDAO.readRecipes()
-    }
 
+    // ****************** INSERT ****************
     suspend fun insertRecipes(recipesEntity: RecipesEntity) {
         recipesDAO.insertRecipes(recipesEntity)
     }
 
-    fun readFavoriteRecipes(): Flow<List<FavoritesEntity>> {
-        return  favoritesDAO.readFavorites()
-    }
-
-    fun insertFavorite(favoritesEntity: FavoritesEntity) {
+    suspend fun insertFavorite(favoritesEntity: FavoritesEntity) {
         favoritesDAO.insertFavorites(favoritesEntity)
     }
 
-    fun deleteFavorite(recipeId: Int){
+    suspend fun insertJoke(jokeEntity: JokeEntity) {
+        jokeDao.insertJoke(jokeEntity)
+    }
+
+    // ****************** DELETE ****************
+    suspend fun deleteFavorite(recipeId: Int) {
         favoritesDAO.deleteById(recipeId)
     }
 
-    fun deleteAllFavorites(){
+    suspend fun deleteAllFavorites() {
         favoritesDAO.deleteAllFavoriteRecipes()
     }
-
-    suspend fun readJoke(): JokeEntity? = jokeDao.readJoke()
-
-    suspend fun insertJoke(jokeEntity: JokeEntity) = jokeDao.insertJoke(jokeEntity)
 
 }

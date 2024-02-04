@@ -1,7 +1,7 @@
 package com.example.domain.models
 
 
-data class ExtendedIngredientRest(
+data class ExtendedIngredientClean(
     val amount: Double? = 0.0,
     val consistency: String?,
     val image: String?,

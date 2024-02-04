@@ -10,8 +10,8 @@ class RecipesTypeConverter {
     val gson = Gson()
 
     @TypeConverter
-    fun foodRecipeToString(foodRecipes: FoodRecipes): String {
-        return gson.toJson(foodRecipes)
+    fun foodRecipeToString(foodRecipesRest: FoodRecipes): String {
+        return gson.toJson(foodRecipesRest)
     }
 
     @TypeConverter
