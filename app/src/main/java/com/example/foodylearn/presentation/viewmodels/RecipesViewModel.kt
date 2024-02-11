@@ -41,7 +41,6 @@ class RecipesViewModel @Inject constructor(
         return queries.apply {
             search?.let { put(Constants.QUERY_SEARCH, it) }
             put(Constants.QUERY_NUMBER, Constants.DEFAULT_RECIPES_NUMBER)
-            put(Constants.QUERY_API_KEY, Constants.API_KEY)
             put(Constants.QUERY_TYPE, mealType)
             put(Constants.QUERY_DIET, dietType)
             put(Constants.QUERY_ADD_RECIPE_INFO, "true")
