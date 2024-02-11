@@ -19,6 +19,12 @@ class FavoriteRecipesFragment :
     private val mainViewModel: MainViewModel by viewModels()
     private val adapter by lazy { FavoriteRecipesAdapter(requireActivity(), mainViewModel) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null)
+            mainViewModel.onMainScreenIntent(UserIntent.OnGetFavoriteRecipes)
+    }
+
     //todo need to refactor
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,10 +34,6 @@ class FavoriteRecipesFragment :
 
         binding.rvFavorites.adapter = adapter
         binding.rvFavorites.layoutManager = LinearLayoutManager(requireContext())
-
-
-        if (savedInstanceState == null)
-            mainViewModel.onMainScreenIntent(UserIntent.OnGetFavoriteRecipes)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -9,18 +9,15 @@ import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.lang.NullPointerException
+import java.lang.StringBuilder
 import java.util.concurrent.atomic.AtomicInteger
 
 val handler = CoroutineExceptionHandler { _, e ->
-    if (e is CancellationException) {
-        println("rethrow ${e.message}")
-        throw e
-    }
-    else
-     println("Catched ${e.message}")
+
+    println("Catched in handler ${e.message}")
 }
 val superJob = SupervisorJob()
-val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default + handler)
+val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.Default + handler + superJob)
 
 
 val mutex = Mutex()
@@ -30,64 +27,81 @@ var counter = 0
 
 val ids = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
 
-fun main()   {
-//    val photoRepositoryImpl = SomeRepositoryImpl()
+//fun main(): Unit = runBlocking {
+//    println("before")
 //
-//    coroutineScope.launch {
-//        val result = photoRepositoryImpl.fetchPhotosByIds(ids)
-//        println("photo Result = $result")
+//    viewModelScope.launch {
+//        println(getAnyUseCase().joinToString())
 //    }.join()
-//    superJobsTest(coroutineScope)
-
-    val whenPrint = "before"
-    if (whenPrint != "after" && whenPrint != "before") {
-        println("STOPPED")
-    }
-    println("fin")
-}
-
-//fun main() = runBlocking {
-//    coroutineScope.launch {
-//        count()
-//    }.join()
+//
+//
+//    println("fin")
 //}
 
-suspend fun superJobsTest(coroutineScope: CoroutineScope) {
-        withContext(Dispatchers.IO + handler) {
-            println("superJobMain start")
-            delay(1000)
 
-            launch(SupervisorJob()) {
-                println("A start")
 
-                launch() {
-                    println("B child start")
-                    delay(1000)
-                    println("B exception delenie")
-                    val delene = 2 / 0
-                    println("B child  finish")
+suspend fun getAnyUseCase(): List<String> {
+    val resultList = mutableListOf<String>()
 
-                    launch {
-                        println("C child start")
-                        delay(1000)
-                        println("C child  finish")
-                    }
-                }.join()
-
-                println("A finish")
-
+    withContext(Dispatchers.IO) {
+        supervisorScope {
+            launch {
+                resultList.add("first")
             }.join()
 
-
-            val secondChildJob = launch {
-                println("D start")
-                delay(1000)
-                println("D finish")
+            launch() {
+                throw IllegalAccessException("fuck exception")
+                resultList.add("second")
             }.join()
 
-
-            println("SuperJob finish")
+            launch {
+                resultList.add("third")
+            }.join()
         }
+
+    }
+
+
+    return resultList
+}
+
+
+suspend fun superJobsTest(coroutineScope: CoroutineScope) {
+    withContext(Dispatchers.IO + handler) {
+        println("superJobMain start")
+        delay(1000)
+
+        launch(SupervisorJob()) {
+            println("A start")
+
+            launch() {
+                println("B child start")
+                delay(1000)
+                println("B exception delenie")
+                val delene = 2 / 0
+                println("B child  finish")
+
+                launch {
+                    println("C child start")
+                    delay(1000)
+                    println("C child  finish")
+                }
+            }.join()
+
+            println("A finish")
+
+        }.join()
+
+
+        val secondChildJob = launch {
+            println("D start")
+            delay(1000)
+            println("D finish")
+        }.join()
+
+
+        println("SuperJob finish")
+    }
 
 }
 
@@ -263,4 +277,30 @@ class Test() {
     fun printPublic() {
         print("Print public")
     }
+}
+
+//aaa bb cc acccd
+
+fun main(){
+    println(testString("ccc"))
+}
+fun testString(input: String): String {
+    var counter = 0
+    var previous = input[0]
+    val result = StringBuilder()
+
+    input.forEachIndexed { index, char  ->
+        if (char != previous) {
+            result.append("$previous$counter")
+            counter = 0
+        }
+        counter++
+        previous = char
+
+        if (index == input.length - 1) {
+            result.append("$char$counter")
+        }
+    }
+
+    return result.toString()
 }

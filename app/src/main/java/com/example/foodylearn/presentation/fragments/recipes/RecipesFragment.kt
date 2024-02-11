@@ -29,6 +29,14 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
     private val recipesViewModel by activityViewModels<RecipesViewModel>()
     private val recipesAdapter by lazy { RecipesAdapter() }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null)
+            mainViewModel.onMainScreenIntent(
+                UserIntent.OnGetRecipes(recipesViewModel.applyQueries())
+            )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recipesFab.setOnClickListener {
@@ -36,11 +44,6 @@ class RecipesFragment : ABaseFragment<FragmentRecipesBinding>(FragmentRecipesBin
         }
         setUpRecyclerView()
         initScreenStateObserver()
-
-        if (savedInstanceState == null)
-            mainViewModel.onMainScreenIntent(
-                UserIntent.OnGetRecipes(recipesViewModel.applyQueries())
-            )
     }
 
     private fun initScreenStateObserver() {

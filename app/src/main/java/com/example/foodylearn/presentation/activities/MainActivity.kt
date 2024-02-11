@@ -27,8 +27,6 @@ class MainActivity : ABaseActivity<ActivityMainBinding>(ActivityMainBinding::inf
             )
         )
 
-
-        //TODO replace with classic fragment transactions to avoid fragments recreation
         binding.bottomNavigationView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
     }

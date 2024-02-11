@@ -54,9 +54,7 @@ class MainViewModel @Inject constructor(
     private fun onGetRecipes(queries: Map<String, String>) {
         mainScope(exceptionHandler = exceptionHandler { onGetRecipesError(it) }) {
             _recipesFragmentState.update { it.copy(isLoading = true) }
-            val result = getRecipesUseCase.invoke(queries)
-            _recipesFragmentState.update { it.copy(isLoading = false) }
-            when (result) {
+            when (val result = getRecipesUseCase.invoke(queries)) {
                 is Result.Success -> onGetRecipesSuccess(result.data)
                 is Result.Error -> onGetRecipesError(result.message)
             }
@@ -66,13 +64,13 @@ class MainViewModel @Inject constructor(
 
     private fun onGetRecipesSuccess(foodRecipesClean: FoodRecipesClean) {
         _recipesFragmentState.update {
-            it.copy(recipes = foodRecipesClean, error = null)
+            it.copy(isLoading = false, recipes = foodRecipesClean, error = null)
         }
     }
 
     private fun onGetRecipesError(message: String) {
         _recipesFragmentState.update {
-            it.copy(recipes = FoodRecipesClean(emptyList()), error = UiText.DynamicString(message))
+            it.copy(isLoading = false, recipes = FoodRecipesClean(emptyList()), error = UiText.DynamicString(message))
         }
     }
 

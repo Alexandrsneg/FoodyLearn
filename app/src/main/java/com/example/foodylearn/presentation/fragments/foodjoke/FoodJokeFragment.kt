@@ -17,12 +17,16 @@ import com.example.foodylearn.util.repeatOnLifecycleExt
 
 class FoodJokeFragment : ABaseFragment<FragmentFoodJokeBinding>(FragmentFoodJokeBinding::inflate) {
     private val mainViewModel by activityViewModels<MainViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null)
+            getJoke()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initScreenStateObserver()
         initListeners()
-        if (savedInstanceState == null)
-            getJoke()
     }
 
     private fun initListeners() {
