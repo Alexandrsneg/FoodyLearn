@@ -11,11 +11,14 @@ import com.example.foodylearn.presentation.mvi.UserIntent
 import com.example.foodylearn.presentation.mvi.RecipesFragmentState
 import com.example.foodylearn.util.UiText
 import com.example.foodylearn.util.exceptionHandler
+import com.example.foodylearn.util.extensions.mainSafeCoroutineExceptionHandler
 import com.example.foodylearn.util.extensions.mainScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,7 +55,10 @@ class MainViewModel @Inject constructor(
 
     /************** RECIPES_LIST ***************************/
     private fun onGetRecipes(queries: Map<String, String>) {
-        mainScope(exceptionHandler = exceptionHandler { onGetRecipesError(it) }) {
+        val handler = mainSafeCoroutineExceptionHandler { _, th ->
+            onGetRecipesError(th.message ?: th.toString())
+        }
+        viewModelScope.launch(Dispatchers.Main + handler) {
             _recipesFragmentState.update { it.copy(isLoading = true) }
             when (val result = getRecipesUseCase.invoke(queries)) {
                 is Result.Success -> onGetRecipesSuccess(result.data)
